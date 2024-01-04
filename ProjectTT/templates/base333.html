@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Treasure Trove</title>
+        <meta name="description" content="Hobbies | Tabletop Games | Collectibles | Trading Cards">
+        <meta name="keywords" content="cards, card sleeves, games, toys, collectibles, Lego™, lego, dice, DnD™, dnd, tabletop, table top">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="{% static 'css/styleTT.css' %}">
+    </head>
+    <body>
+
+        {% include 'navbar.html' %}
+        <!-- Adding modularity to page elements. -->
+        <!-- Page Content - START   -->
+
+        {% block content_test %}
+        {% endblock content_test %}
+
+        {% block content_home %}
+        {% endblock content_home %}
+
+        {% block content_cart %}
+        {% endblock content_cart %}
+
+        {% block content_itemInfo %}
+        {% endblock content_itemInfo %}
+        
+        {% block content_itemCreate %}
+        {% endblock content_itemCreate %}
+
+        {% block content_itemUpdate %}
+        {% endblock content_itemUpdate %}
+
+        {% block content_itemDelete %}
+        {% endblock content_itemDelete %}
+
+        {% block content_userProfile %}
+        {% endblock content_userProfile %}
+
+        {% block content_signin %}
+        {% endblock content_signin %}
+
+        <!-- Page Content - END     -->
+
+        <footer class="text-center">
+            <div class="container-fluid text-center">
+                <div class="row">
+                    <div class="col-md-12 pb-3" >
+                        © 2023 - A.Panussis
+                        <a class="eyeRestPadding" href="https://www.facebook.com/">
+                            <img src="images/icons8-facebook-48.png" class="img-fluid" alt="Facebook"> <!--Icon downloaded from "https://icons8.com/icons/set/facebooklogo"-->
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- jQuery, Popper.js, and Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        
+        <!-- <script src="{% load static 'js/scriptTT.js' %}"></script> -->
+
+    </body>
+
+</html>

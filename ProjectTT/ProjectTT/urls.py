@@ -17,6 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from ZZPageManagerApp.views import viewTest,viewHome,viewCart
+
 urlpatterns = [
+    path('test/', viewTest, name='test'),
+    path('', viewHome, name='home'),
+    path('cart/', viewCart, name='cart'),
+
     path('admin/', admin.site.urls),
 ]
