@@ -12,7 +12,7 @@ def viewTest(request, *args, **kwargs):
     s1 = str(request.user.is_authenticated)
     s2 = str(args)
     s3 = str(kwargs)
-    printThis = currentUser  + " || Authenticated: " + s1 + " || Args: " + s2 + " || Keyword Args: " + s3
+    printThis = "User: " + currentUser + " || Authenticated: " + s1 + " || Args: " + s2 + " || Keyword Args: " + s3
     context = {
         "dingus": printThis
     }
@@ -25,7 +25,7 @@ def viewHome(request, *args, **kwargs):
     s1 = str(request.user.is_authenticated)
     s2 = str(args)
     s3 = str(kwargs)
-    printThis = currentUser  + " || Authenticated: " + s1 + " || Args: " + s2 + " || Keyword Args: " + s3
+    printThis = "User: " + currentUser + " || Authenticated: " + s1 + " || Args: " + s2 + " || Keyword Args: " + s3
     context = {
         "dingus": printThis
     }
@@ -36,11 +36,14 @@ def viewCart(request, *args, **kwargs):
     s1 = str(request.user.is_authenticated)
     s2 = str(args)
     s3 = str(kwargs)
-    printThis = currentUser  + " || Authenticated: " + s1 + " || Args: " + s2 + " || Keyword Args: " + s3
+    printThis = "User: " + currentUser + " || Authenticated: " + s1 + " || Args: " + s2 + " || Keyword Args: " + s3
+    contentGreet = "Hello " + currentUser + "."
+    itemList1 = [4, 'long list', 'of items']
+    itemList1F = ' | '.join(map(str, itemList1))
+
     context = {           
         "dingus": printThis,
-        "Greeting": ("Hello ", currentUser,"."),                                 
-        "Example1": "This is the cart page.",
-        "ExampleList1": [4, "long list", "of items"]
+        "Greeting": contentGreet,
+        "ExampleList1": itemList1F,
     }
     return render(request, "cart.html", context)
