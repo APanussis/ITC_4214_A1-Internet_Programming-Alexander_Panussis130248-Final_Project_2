@@ -6,6 +6,9 @@
         </title>
     </head>
     <body style="color: rgb(203, 33, 84); font-weight: bold; background-color: rgb(193, 170, 139);">
+
+        {% include 'navbar.html' %}
+
         {% block content_test %}
         {% endblock content_test %}
 
@@ -14,5 +17,6 @@
 
         {% block content_cart %}
         {% endblock content_cart %}
+        
     </body>
 </html>
