@@ -4,8 +4,11 @@
         <title>
             Base Template
         </title>
+            {% load bootstrap5 %}
+            {% bootstrap_css %}
+            {% bootstrap_javascript %}
     </head>
-    <body style="color: rgb(203, 33, 84); font-weight: bold; background-color: rgb(193, 170, 139);">
+    <body> <!-- style="color: rgb(203, 33, 84); font-weight: bold; background-color: rgb(193, 170, 139);" -->
 
         {% include 'navbar.html' %}
 
@@ -17,6 +20,6 @@
 
         {% block content_cart %}
         {% endblock content_cart %}
-        
+
     </body>
 </html>

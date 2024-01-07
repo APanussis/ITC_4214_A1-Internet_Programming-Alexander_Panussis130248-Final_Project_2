@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    #3rd-Party Apps
+    'bootstrap5',
+
     #My Apps
     'CarouselApp',
     'CartApp',
