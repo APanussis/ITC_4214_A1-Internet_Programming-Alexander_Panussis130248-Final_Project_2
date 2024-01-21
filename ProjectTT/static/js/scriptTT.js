@@ -98,11 +98,6 @@ $(document).ready(function() {
     });
     //Sort currently shown entries in table - END - Panussis
 
-    
-
-
-
-
     // Delete entry when the delete button is clicked
     $('#entriesTable').on('click', '.btn-delete', function() {
         var row = $(this).closest('tr');

@@ -4,7 +4,7 @@ from django.db import models
 
 class ModelProduct(models.Model):   #inherits from default python class "Model"
     name = models.CharField(max_length = 60, unique = True)
-    image = models.ImageField(default="../static/media/logoTTTransp1.png")
+    image = models.ImageField(upload_to="productImages/")
     description = models.TextField(blank = True, null = True)
     category = models.CharField(max_length = 20)
     releaseDate = models.DateField(blank=True, null = True)

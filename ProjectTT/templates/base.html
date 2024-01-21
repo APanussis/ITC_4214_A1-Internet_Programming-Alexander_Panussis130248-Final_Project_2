@@ -1,14 +1,23 @@
 <!doctype html>
+{% load static %}
+{% load bootstrap5 %}
 <html>
+    
     <head>
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+        {% bootstrap_messages %}
+
+        <link rel="stylesheet" type="text/css" href="{% static 'css/styleTT.css' %}">
+
         <title>
-            Base Template
+            {% block title %}
+                Base Template
+            {% endblock title %}
         </title>
-            {% load bootstrap5 %}
-            {% bootstrap_css %}
-            {% bootstrap_javascript %}
     </head>
-    <body> <!-- style="color: rgb(203, 33, 84); font-weight: bold; background-color: rgb(193, 170, 139);" -->
+
+    <body> 
 
         {% include 'navbar.html' %}
 
@@ -21,5 +30,11 @@
         {% block content_cart %}
         {% endblock content_cart %}
 
+        {% block content_productInfo %}
+        {% endblock content_productInfo %}
+
+        <script src="{% static 'js/scriptTT.js' %}"></script>
+        
     </body>
+    
 </html>

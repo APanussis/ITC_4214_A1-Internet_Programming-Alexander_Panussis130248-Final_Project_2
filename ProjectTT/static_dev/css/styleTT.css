@@ -1,3 +1,16 @@
+/* 
+color pallete:
+#004580 blue
+#7fc4e1 skyblue
+#E33636 red
+#E58F2B sandy ochra yellow
+
+#4b2a54 dark mode purple
+#ffe600 canary yellow
+#B4309F lighter purple
+#651D77 purple
+*/
+
 /* Carousel css and card css*/
 
 .carousel-inner {
@@ -18,9 +31,10 @@
     color: #E58F2B;
 }
 
-/*Changing some attributes (colors, margin, spacing, e.t.c.) of some assets - BEGIN - Panussis */
+/* Overall Project */
 
 body{
+    font-family: Helvetica, Arial, sans-serif;
     background-color: #7fc4e1;
     z-index: -1;
     display: flex;  /*we set this property to"flex" and the one below to "column", to allow the body's contents to be contained and flexibly manipulated according to the shape
@@ -28,23 +42,19 @@ body{
     flex-direction: column; /*Lets us decide the direction, or rather axis on which items get rearranged/moved towards. */
 }
 
-footer {            /*Make it properly stick to bottom of body.
-                    Might help if it is anchored bottom-center of page canvas*/
-    padding-top: 60px;
-    position:relative;
-    bottom:0;       /*might not be properly defined*/
+footer {            
+    position: relative;
     width:100%;
     height:auto;    
-    background-color: rgb(204, 105, 110);
-    z-index: 1;
+    background-color: #004580;
+    z-index: 2;
 }
 
 h1 {
-    font-family: Helvetica, Arial, sans-serif;
     font-weight: bold;
     font-size: 30px;
     text-align: center;
-    color:#a6dbd7;
+    color:#E58F2B;
     margin: 3;
     padding: 3;
 }
@@ -57,41 +67,31 @@ h1 {
 }
 
 .table {
-    border-color: #3F7CBB;
-    border: 4px #B4309F;
+    border-color: #004580;
+    border: 4px #E33636;
 }
 
-.center {
-    margin-left: auto;
-    margin-right: auto;
-    width: 75%;
-    object-fit: contain;
-}
-  
 .navbar {
-    background-color: #1B329E;
+    background-color: #004580;
     z-index: 2;
 }
 
 .navbar-toggler{
-    background-color: rgb(204, 105, 110);
-    color:#fff;
+    background-color: #E33636;
+    color:#004580;
 }
 
 .nav-item {
     border-radius: 5px;
-    background-color: rgb(204, 105, 110);
+    background-color: #E33636;
     margin: auto 20px auto 20px;
 }
 
 .nav-link {
-    border-width: 20px;
-    border-color: rgb(50, 87, 75);
-    border-left-width: 20px;
-    border-right-width: 20px;
-    margin-left: 15px;
-    margin-right: 15px;
+    border-width: 16px;
+    margin-left: 16px;
+    margin-right: 16px;
     font-size: large;
-    color:3F7CBB;
+    color: #004580;
 }
 

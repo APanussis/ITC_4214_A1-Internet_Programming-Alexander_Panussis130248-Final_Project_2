@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content_productInfo %}
+    <h4>
+        {{ dingus }}
+    </h4>
+    <h1>
+        Currently looking at: {{ keyObj.name }}
+    </h1>
+    <img src="{{ keyObj.image.url }}" class="img-fluid" alt="Image of {{ keyObj.name }}">
+    <ul>
+        <li>
+            Description:
+            <p>
+                {{ keyObj.description }}
+            </p>
+        </li>
+        <hr>
+        <li>
+            Category: {{keyObj.category}}
+        </li>
+        <li>
+            Release date: {{keyObj.releaseDate}}
+        </li>
+        <li>
+            Currently available: {{keyObj.currentStock}}
+        </li>
+        <li>
+            Manufacturer: {{keyObj.manufacturer}}
+        </li>
+        <li>
+            Price: {{keyObj.price}}
+        </li>
+    </ul>
+{% endblock content_productInfo %}

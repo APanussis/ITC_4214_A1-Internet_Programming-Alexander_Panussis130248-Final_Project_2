@@ -1,37 +1,36 @@
+{% load static %}
+
 <header class="sticky-top">
-<!-- Navigation bar with logo and menu items -->
-    <nav class="navbar navbar-expand-lg">
-        
-        <a class="navbar-brand" href=" ">
-            {% load static %}
-            <img src="{% static '/logoTTTransp1.png' %}" class="img-fluid" alt="Treasure Trove">
-        </a>
+    <nav class="navbar navbar-dark navbar-expand-md">
+        <div class="container-fluid">
 
-        <h1>
-            Treasure Trove
-        </h1>
+            <div class="d-md-none m-2"> <!--BS class - hide on md and wider screens-->
+                <a class="navbar-brand" href="/">
+                    <img src="{% static 'logoTT_9.webp' %}" alt="Treasure Trove" width="64" height="me-auto">
+                </a>
+            </div>
 
-        <!-- Hamburger menu -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon">
-                {% load static %}
-                <img src="{% static '/icons8-double-down-48_EDITEDv1.png' %}" class="center" alt="Menu">
-            </span>
-        </button>
-        
-        <!-- Collapsible menu items -->
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/"> Home </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/test"> Test Page </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/cart"> Cart </a>
-                </li>
-            </ul>
+            <div class="d-none d-md-block m-2"> <!--BS class - hide on screens smaller than md-->
+                <a class="navbar-brand" href="/">
+                    <img src="{% static 'logoTT_9.webp' %}" alt="Treasure Trove" width="128" height="me-auto">
+                </a>
+            </div>
+
+            <button class="navbar-toggler btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTT" aria-controls="navbarTT" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarTT">
+                <ul class="navbar-nav me-auto m-2 mb-md-1">
+                    <li class="nav-item flex-fill">
+                        <a class="nav-link" href="/test">Test Page</a>
+                    </li>
+                    <li class="nav-item flex-fill">
+                        <a class="nav-link" href="/cart">Cart</a> <!-- Add item counter blip to this button.-->
+                    </li>
+                </ul>
+            </div>
+
         </div>
     </nav>
 </header>
