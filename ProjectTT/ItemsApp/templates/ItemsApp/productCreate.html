@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content_productInfo %}
+    <h4>
+        {{ dingus }}
+    </h4>
+    <h1>
+        Create a new Product entry:
+    </h1>
+    <form method='POST'> {% csrf_token %}
+        {{ keyForm.as_p }}
+        <input type='submit' value = 'Save' />
+    </form>
+{% endblock content_productInfo %}

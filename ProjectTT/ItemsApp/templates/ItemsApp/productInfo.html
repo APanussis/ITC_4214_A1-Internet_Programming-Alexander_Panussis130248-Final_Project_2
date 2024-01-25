@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content_productInfo %}
     <h4>
@@ -7,7 +8,13 @@
     <h1>
         Currently looking at: {{ keyObj.name }}
     </h1>
-    <img src="{{ keyObj.image.url }}" class="img-fluid" alt="Image of {{ keyObj.name }}">
+
+    {% if keyObj.image != None and keyObj.image != '' %}
+        <img src="{{ keyObj.image.url }}" class="img-fluid" alt="Image of {{ keyObj.name }}">
+    {% else %}
+        <img src="{% static 'logoTT_sample2.png' %}" class="img-fluid" alt="Image of {{ keyObj.name }}">
+    {% endif %}
+
     <ul>
         <li>
             Description:

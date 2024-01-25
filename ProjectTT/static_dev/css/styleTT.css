@@ -1,8 +1,8 @@
 /* 
-color pallete:
+color pallete reference:
 #004580 blue
 #7fc4e1 skyblue
-#E33636 red
+#E33636 burgundy red
 #E58F2B sandy ochra yellow
 
 #4b2a54 dark mode purple
@@ -37,8 +37,12 @@ body{
     font-family: Helvetica, Arial, sans-serif;
     background-color: #7fc4e1;
     z-index: -1;
-    display: flex;  /*we set this property to"flex" and the one below to "column", to allow the body's contents to be contained and flexibly manipulated according to the shape
-                    and size of the browser window. Good sources: "https://css-tricks.com/snippets/css/a-guide-to-flexbox/" , "https://dev.to/nehalahmadkhan/how-to-make-footer-stick-to-bottom-of-web-page-3i14" */
+    display: flex;  /*we set this property to"flex" and the one below to "column", 
+                    to allow the body's contents to be contained and flexibly manipulated according to the shape
+                    and size of the browser window.
+                    "https://css-tricks.com/snippets/css/a-guide-to-flexbox/"
+                    "https://dev.to/nehalahmadkhan/how-to-make-footer-stick-to-bottom-of-web-page-3i14" */
+
     flex-direction: column; /*Lets us decide the direction, or rather axis on which items get rearranged/moved towards. */
 }
 
