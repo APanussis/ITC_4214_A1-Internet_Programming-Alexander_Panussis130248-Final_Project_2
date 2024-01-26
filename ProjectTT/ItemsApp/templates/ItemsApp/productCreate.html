@@ -8,8 +8,23 @@
     <h1>
         Create a new Product entry:
     </h1>
-    <form method='POST'> {% csrf_token %}
-        {{ keyForm.as_p }}
-        <input type='submit' value = 'Save' />
+    <form action='.' method='POST'> {% csrf_token %}
+
+        <div class="row mb-3 m-2"> <!-- Iteratively render fields -->
+            {% for field in keyForm %}
+                <div class="col-md-8">
+                    <label>{{field.label}}</label>
+                    <p>{{field}} </p>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="row mb-3 m-2"> <!-- Attempts to execute a POST method to create new product entry in DB-->
+            <div class="col-md-4 ">
+                <input class="btn btn-success" type='submit' value = 'Save' />
+            </div>
+        </div>
     </form>
 {% endblock content_productInfo %}
+
+
