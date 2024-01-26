@@ -1,11 +1,32 @@
 from PIL import Image
+import datetime
 from django import forms
-from django.forms import SelectDateWidget
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 from .models import ModelProduct
 
 class FormProductCreate(forms.ModelForm):
+    name                    = forms.CharField(max_length = 60) 
+    image                   = forms.ImageField(required=False) 
+    description             = forms.CharField(widget=forms.Textarea)    #TextArea widget to give the user space to write something more than a single sentence.
+    category                = forms.CharField(max_length = 20)
+    release_date            = forms.DateField(                          #DateInput widget for convenience
+                                    initial=datetime.date.today,
+                                    widget= forms.DateInput 
+                                        (attrs=
+                                            {                       
+                                                'type':'date',
+                                                'class': 'form-control',
+                                                'cols': 30,
+                                            }
+                                        )
+                                    ) 
+    current_stock           = forms.IntegerField(min_value=0)  
+    manufacturer            = forms.CharField(max_length = 30)
+    price                   = forms.DecimalField(decimal_places = 2, max_digits = 8, min_value=0.01)
+    featured_status         = forms.BooleanField(required=False) 
+    featured_promo_overlay  = forms.ImageField(required=False) 
+
     class Meta:
         model = ModelProduct
         fields = [
@@ -21,27 +42,27 @@ class FormProductCreate(forms.ModelForm):
             'featured_promo_overlay',
         ]
 
-class rFormProductCreate(forms.Form):
-    name                    = forms.CharField(max_length = 60) 
-    image                   = forms.ImageField(required=False) 
-    description             = forms.CharField(widget=forms.Textarea)    #TextArea widget to give the user space to write something more than a single sentence.
-    category                = forms.CharField(max_length = 20)
-    release_date            = forms.DateField(                          #DateInput widget for convenience
-                                    widget= forms.DateInput 
-                                        (attrs=
-                                            {                       
-                                                'type':'date',
-                                                'placeholder': 'Unknown Release Date', 
-                                                'class': 'form-control',
-                                                'cols': 30,
-                                            }
-                                        )
-                                    ) 
-    current_stock           = forms.IntegerField(min_value=0)  
-    manufacturer            = forms.CharField(max_length = 30)
-    price                   = forms.DecimalField(decimal_places = 2, max_digits = 8, min_value=0.01)
-    featured_status         = forms.BooleanField(required=False) 
-    featured_promo_overlay  = forms.ImageField(required=False) 
+# class rFormProductCreate(forms.Form): #Raw form
+#     name                    = forms.CharField(max_length = 60) 
+#     image                   = forms.ImageField(required=False) 
+#     description             = forms.CharField(widget=forms.Textarea)    #TextArea widget to give the user space to write something more than a single sentence.
+#     category                = forms.CharField(max_length = 20)
+#     release_date            = forms.DateField(                          #DateInput widget for convenience
+#                                     widget= forms.DateInput 
+#                                         (attrs=
+#                                             {                       
+#                                                 'type':'date',
+#                                                 'placeholder': 'Unknown Release Date', 
+#                                                 'class': 'form-control',
+#                                                 'cols': 30,
+#                                             }
+#                                         )
+#                                     ) 
+#     current_stock           = forms.IntegerField(min_value=0)  
+#     manufacturer            = forms.CharField(max_length = 30)
+#     price                   = forms.DecimalField(decimal_places = 2, max_digits = 8, min_value=0.01)
+#     featured_status         = forms.BooleanField(required=False) 
+#     featured_promo_overlay  = forms.ImageField(required=False) 
 
 
 
