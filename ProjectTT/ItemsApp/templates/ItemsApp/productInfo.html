@@ -10,9 +10,17 @@
     </h1>
 
     {% if keyObj.image != None and keyObj.image != '' %}
-        <img src="{{ keyObj.image.url }}" class="img-fluid" alt="Image of {{ keyObj.name }}">
+        <div class="row m-2"> 
+            <div class="col-4">
+                <img src="{{ keyObj.image.url }}" class="img-fluid" alt="Image of {{ keyObj.name }}">
+            </div>
+        </div>
     {% else %}
-        <img src="{% static 'logoTT_sample2.png' %}" class="img-fluid" alt="Image of {{ keyObj.name }}">
+        <div class="row m-2"> 
+            <div class="col-4">
+                <img src="{% static 'logoTT_sample2.png' %}" class="img-fluid" alt="Image of {{ keyObj.name }}">
+            </div>
+        </div>
     {% endif %}
 
     <ul>
