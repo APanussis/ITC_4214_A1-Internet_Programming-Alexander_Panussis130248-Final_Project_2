@@ -5,6 +5,9 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 
 from .models import ModelProduct
 
+class FormSearch(forms.Form):
+    q = forms.CharField(label='Search', max_length=50)
+
 class FormProductCreate(forms.ModelForm):
     name                    = forms.CharField(max_length = 60) 
     image                   = forms.ImageField(required=False) 
@@ -41,6 +44,13 @@ class FormProductCreate(forms.ModelForm):
             'featured_status',
             'featured_promo_overlay',
         ]
+
+    #EMAIL VALIDATION - Might be needed for UsersApp depending on Django's in-built field validation.
+    # def clean_email(self, *args, **kwargs):
+    #     email = self.cleaned_data.get("email")
+    #     if not email.endswith(".edu" or ".com" or ".gr" or ".net"):
+    #         raise forms.ValidationError("This is not a valid e-mail.")
+    #     return email
 
 # class rFormProductCreate(forms.Form): #Raw form
 #     name                    = forms.CharField(max_length = 60) 

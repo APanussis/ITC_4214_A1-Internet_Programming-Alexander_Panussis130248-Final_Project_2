@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content_test %}
+
     <h1>Test HTML page.</h1>
     <p>Hi.</p>
     {{ dingus }}
@@ -9,4 +11,29 @@
     <div class="container-lg" style="background-color: brown;">100% wide until large breakpoint</div>
     <div class="container-xl" style="background-color: brown;">100% wide until extra large breakpoint</div>
     <div class="container-xxl" style="background-color: brown;">100% wide until extra extra large breakpoint</div>
+
+    <!-- Search Bar - Start -->
+    <h4>Search Functionality..</h4>
+    <form>
+        <input type="text" name="qT">
+        <button> Search </button>
+    </form>
+
+    <!-- Search Bar - End -->
+
+    <!-- Search Results - Start -->
+    <h4> Search results: </h4>
+    
+    <ul>
+        {% if results %}
+        Number of results: {{ results|length }}
+            {% for obj in results %}
+            <li>
+                {{ obj.name }} | {{ obj.description }} | {{ obj.rank }}
+            </li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+    <!-- Search Results - End -->
+
 {% endblock content_test %}

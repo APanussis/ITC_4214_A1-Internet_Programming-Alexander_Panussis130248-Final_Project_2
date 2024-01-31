@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from ZZPageManagerApp.views import viewTest,viewHome,viewCart
-from ItemsApp.views import viewProductInfo, viewProductCreate
+
 
 urlpatterns = [
     #ZZPageManagerApp
@@ -30,9 +30,8 @@ urlpatterns = [
     path('cart/', viewCart, name='cart'),
 
     #ItemsApp
-    path('product/', viewProductInfo, name='product'),
-    path('productCreate/', viewProductCreate, name='productCreate'),
-
+    path('', include('ItemsApp.urls')), ##### fix this!
+    
     #Default Django
     path('admin/', admin.site.urls),
 ]

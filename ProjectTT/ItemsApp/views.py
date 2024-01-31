@@ -2,8 +2,11 @@ import datetime
 from django.utils import timezone
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.generic import FormView, ListView
+from django.db.models import Q
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 
-from .forms import FormProductCreate
+from .forms import FormProductCreate, FormSearch
 from .models import ModelProduct
 
 
@@ -29,7 +32,7 @@ def viewProductCreate(request, *args, **kwargs):
     #                                                                     #to pass into the DB entry.
     #         formRetrieved = rFormProductCreate() #Re-render the form to empty the fields after saving the new product.
     
-    # Simplified version of code above, using a forms.ModelForm instead of a raw forms.Form
+    # Simplified version of code above, using the forms.ModelForm instead of a raw forms.Form
     formRetrieved = FormProductCreate(request.POST or None, initial=initial_data) #Current date as "initial_data" for the "release_date" field
     if formRetrieved.is_valid():
         formRetrieved.save()
@@ -49,11 +52,59 @@ def viewProductInfo(request, *args, **kwargs):
     s3 = str(kwargs)
     userAndArgsInfo = "User: " + currentUser + " || Authenticated: " + flagAuthenticated + " || Args: " + s2 + " || Keyword Args: " + s3
     
-    objRetrieved = ModelProduct.objects.get(name="5th test with no image") #get users query info from searchbar, keywords, radiobutton filters, e.t.c.
+    objRetrieved = ModelProduct.objects.get(name="1st product") #get users query info from searchbar, keywords, radiobutton filters, e.t.c.
 
     context = {
         "dingus": userAndArgsInfo,
         "keyObj": objRetrieved,
     }
 
-    return render(request, "ItemsApp/productInfo.html", context)  
+    return render(request, "ItemsApp/productInfo.html", context)
+
+def viewProductSearch(request, *args, **kwargs): ##### WIP - Currently working on
+    currentUser = str(request.user)
+    flagAuthenticated = str(request.user.is_authenticated)
+    s2 = str(args)
+    s3 = str(kwargs)
+    userAndArgsInfo = "User: " + currentUser + " || Authenticated: " + flagAuthenticated + " || Args: " + s2 + " || Keyword Args: " + s3
+    
+    q = request.GET.get('qT')
+
+    if q:
+        vectorSet = SearchVector('name', 'category', 'description', 'manufacturer')
+        outQuery = SearchQuery(q)
+
+        objSet = ModelProduct.objects.annotate(rank=SearchRank(vectorSet, outQuery)).order_by('-rank')
+    else:
+        objSet = None
+
+    context = {
+        "dingus": userAndArgsInfo,
+        "results": objSet,
+    }
+
+    return render(request, "test.html", context)
+
+
+class cViewProductSearchResults(ListView): ##### NOT IMPLEMENTED
+
+    # modelAccessed = ModelProduct
+    model = ModelProduct
+    targetTemplate = 'test.html'
+
+    def get_queryset(self): 
+        queryDataset = self.request.GET.get('q')
+        outSearchQuery = SearchQuery(queryDataset)
+
+        #Search Vectors: the fields that the query will search through in the postgresDB
+        vectorSet = SearchVector('name', 'category', 'description', 'manufacturer')
+
+        objectList = ModelProduct.objects.annotate(
+            rank=SearchRank(vectorSet, outSearchQuery),
+        ).order_by('-rank')
+
+        # objectList = ModelProduct.objects.filter(
+        #     Q(name__icontains=queryDataset) | Q(type__icontains=queryDataset)
+        # )
+
+        return objectList
