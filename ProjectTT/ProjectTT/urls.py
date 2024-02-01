@@ -20,12 +20,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
-from ZZPageManagerApp.views import viewTest,viewHome,viewCart
+from ZZPageManagerApp.views import viewHome,viewCart
 
 
 urlpatterns = [
     #ZZPageManagerApp
-    path('test/', viewTest, name='test'),
+    # path('test/', viewTest, name='test'),
     path('', viewHome, name='home'),
     path('cart/', viewCart, name='cart'),
 

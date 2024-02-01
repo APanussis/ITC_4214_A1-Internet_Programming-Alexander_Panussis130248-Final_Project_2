@@ -84,27 +84,3 @@ def viewProductSearch(request, *args, **kwargs): ##### WIP - Currently working o
     }
 
     return render(request, "test.html", context)
-
-
-class cViewProductSearchResults(ListView): ##### NOT IMPLEMENTED
-
-    # modelAccessed = ModelProduct
-    model = ModelProduct
-    targetTemplate = 'test.html'
-
-    def get_queryset(self): 
-        queryDataset = self.request.GET.get('q')
-        outSearchQuery = SearchQuery(queryDataset)
-
-        #Search Vectors: the fields that the query will search through in the postgresDB
-        vectorSet = SearchVector('name', 'category', 'description', 'manufacturer')
-
-        objectList = ModelProduct.objects.annotate(
-            rank=SearchRank(vectorSet, outSearchQuery),
-        ).order_by('-rank')
-
-        # objectList = ModelProduct.objects.filter(
-        #     Q(name__icontains=queryDataset) | Q(type__icontains=queryDataset)
-        # )
-
-        return objectList
