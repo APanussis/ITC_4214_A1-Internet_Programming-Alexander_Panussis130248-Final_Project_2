@@ -1,9 +1,5 @@
 import datetime
-from django.utils import timezone
-from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic import FormView, ListView
-from django.db.models import Q
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 
 from .forms import FormProductCreate, FormSearch
@@ -13,7 +9,7 @@ from .models import ModelProduct
 # Create your views here.
 
 # # # # # #
-# THIS VIEW ONLY FOR TESTING AND DEBUGGING
+# THE VIEW bellow ONLY FOR TESTING AND DEBUGGING
 #
 #
 
@@ -40,6 +36,8 @@ def viewTest(request, *args, **kwargs): ##### WIP - Currently working on
         objSet = None
 
     context = {
+        "currentUser": currentUser,
+        "flagAuthenticated": flagAuthenticated,
         "dingus": userAndArgsInfo,
         "results": objSet,
     }
@@ -48,7 +46,7 @@ def viewTest(request, *args, **kwargs): ##### WIP - Currently working on
 
 #
 #
-#
+# THE VIEW above ONLY FOR TESTING AND DEBUGGING
 # # # # # #
 
 def viewProductCreate(request, *args, **kwargs):
@@ -78,6 +76,8 @@ def viewProductCreate(request, *args, **kwargs):
         formRetrieved = FormProductCreate() 
 
     context = {
+        "currentUser": currentUser,
+        "flagAuthenticated": flagAuthenticated,
         "dingus": userAndArgsInfo,
         "keyForm": formRetrieved,
     }
@@ -94,6 +94,8 @@ def viewProductInfo(request, *args, **kwargs):
     objRetrieved = ModelProduct.objects.get(name="1st product") #get users query info from searchbar, keywords, radiobutton filters, e.t.c.
 
     context = {
+        "currentUser": currentUser,
+        "flagAuthenticated": flagAuthenticated,
         "dingus": userAndArgsInfo,
         "keyObj": objRetrieved,
     }
@@ -123,6 +125,8 @@ def viewProductSearch(request, *args, **kwargs): ##### WIP - Currently working o
         objSet = None
 
     context = {
+        "currentUser": currentUser,
+        "flagAuthenticated": flagAuthenticated,
         "dingus": userAndArgsInfo,
         "results": objSet,
     }

@@ -32,6 +32,24 @@ from django.shortcuts import render
 #     }
 #     return render(request, "home.html", context)
 
+# def viewNavbar(request, *args, **kwargs): 
+#     currentUser = str(request.user)
+#     flagAuthenticated = str(request.user.is_authenticated)
+#     s2 = str(args)
+#     s3 = str(kwargs)
+#     #userAndArgsInfo = "User: " + currentUser + " || Authenticated: " + flagAuthenticated + " || Args: " + s2 + " || Keyword Args: " + s3
+    
+#     #objRetrieved = ModelUser.objects.get(name="1st product") #get users query info from searchbar, keywords, radiobutton filters, e.t.c.
+
+#     context = {
+#         "currentUser": currentUser,
+#         "flagAuthenticated": flagAuthenticated,
+#         #"dingus": userAndArgsInfo,
+#         #"keyObj": objRetrieved,
+#     }
+
+#     return render(request, "/navbar.html", context)
+
 def viewCart(request, *args, **kwargs):
     currentUser = str(request.user)
     s1 = str(request.user.is_authenticated)

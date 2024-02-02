@@ -87,6 +87,10 @@ h4 {
     color:#004580;
 }
 
+.nav-link {
+    color: #004580;
+}
+
 .navbar-nav .nav-item {
     border-radius: 5px;
     background-color: #E33636;

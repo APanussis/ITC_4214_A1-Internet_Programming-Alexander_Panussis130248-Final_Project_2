@@ -32,9 +32,24 @@
                             <a class="nav-link" href="/cart">Cart</a> <!-- Add item counter blip to this button.-->
                         </button>
                     </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item flex-fill">
+                            <button class="btn">
+                                <a class="nav-link" href="/profile">{{ user.username }}</a> <!-- Send to current users profile page.-->
+                            </button>
+                            <button class="btn">
+                                <a class="nav-link" href="{% url 'logout' %}">Log out</a> <!-- Log off and refresh page.-->
+                            </button>
+                        </li>
+                    {% else %}
+                        <li class="nav-item flex-fill">
+                            <button class="btn">
+                                <a class="nav-link" href="{% url 'login' %}">Login</a> <!-- Send to login page.-->
+                            </button>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
-
         </div>
     </nav>
 </header>

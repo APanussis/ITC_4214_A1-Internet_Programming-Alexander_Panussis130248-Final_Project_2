@@ -27,10 +27,14 @@ urlpatterns = [
     #ZZPageManagerApp
     # path('test/', viewTest, name='test'),
     # path('', viewHome, name='home'),
+    #path('navbar/', viewNavbar, name='navbar'), #DEPRECATED
     path('cart/', viewCart, name='cart'),
 
     #ItemsApp
     path('', include('ItemsApp.urls')), ##### fix this!
+
+    #UsersApp
+    path('', include('UsersApp.urls')), ##### fix this!
     
     #Default Django
     path('admin/', admin.site.urls),
