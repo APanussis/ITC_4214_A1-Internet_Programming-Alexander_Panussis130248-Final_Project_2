@@ -63,11 +63,13 @@ h1 {
     padding: 3;
 }
 
-.eyeRestPadding {
-    border-radius: 20px;
-    margin: 20px 20px 20px 20px;
-    padding-top: 20px;
-    padding-bottom: auto;
+h4 {
+    font-weight: bold;
+    text-align: center;
+    background-color: #004580;
+    color:#E33636;
+    margin: 3;
+    padding: 3;
 }
 
 .table {
@@ -85,13 +87,13 @@ h1 {
     color:#004580;
 }
 
-.nav-item {
+.navbar-nav .nav-item {
     border-radius: 5px;
     background-color: #E33636;
     margin: auto 20px auto 20px;
 }
 
-.nav-link {
+.navbar-nav .btn .nav-link {
     border-width: 16px;
     margin-left: 16px;
     margin-right: 16px;
@@ -99,3 +101,25 @@ h1 {
     color: #004580;
 }
 
+.btn {
+    background-color: #E33636;
+    color: #004580;
+}
+
+.btn .nav-link:hover {
+    color: #ffffff !important;
+}
+
+.TT-container-results {
+    background-color: #E33636;
+    color: #2ea376;
+}
+
+.METTtable {
+    background-color: #E58F2B;
+}
+
+.METTtable-col {
+    background-color: #E33636;
+    color: #004580; 
+}

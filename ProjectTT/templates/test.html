@@ -5,35 +5,178 @@
 
     <h1>Test HTML page.</h1>
     <p>Hi.</p>
+    <hr>
     {{ dingus }}
+    <hr>
     <div class="container-sm" style="background-color: brown;">100% wide until small breakpoint</div>
-    <div class="container-md" style="background-color: brown;">100% wide until medium breakpoint</div>
+    <div class="container-md" style="background-color: green;">100% wide until medium breakpoint</div>
     <div class="container-lg" style="background-color: brown;">100% wide until large breakpoint</div>
-    <div class="container-xl" style="background-color: brown;">100% wide until extra large breakpoint</div>
+    <div class="container-xl" style="background-color: green;">100% wide until extra large breakpoint</div>
     <div class="container-xxl" style="background-color: brown;">100% wide until extra extra large breakpoint</div>
+    <hr>
 
     <!-- Search Bar - Start -->
-    <h4>Search Functionality..</h4>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="d-flex flex-column vh-100 overflow-hidden">
+                    <div class="row h-100 mb-3 mx-0 overflow-hidden">
+                        <div class="container-fluid h-100">
+                            <div class="row h-100">
+                                <div class="col-4 h-100 p-0 m-0">
+                                    <div class="card h-100 border rounded bg-white">
+                                        <div class="card-header"> List </div>
+                                        <div class="card-body p-0 m-0 overflow-hidden">
+                                            <div class="list-group h-100 list-group-flush rounded-0">
+                                                <div class="h-100 scrollable overflow-auto"> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Show item<br> Last item<br>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+    <h4>Search Functionality</h4>
+
     <form>
-        <input type="text" name="qT">
-        <button> Search </button>
+        <div class="row g-3 d-flex justify-content-center align-items-center m-2">
+            <div class="col-sm-8">
+                <input class="form-control" type="text" name="qT">
+            </div>
+            <div class="col-sm-2">
+                <button class="btn nav-link" type="submit">Search</button>
+            </div>
+        </div>
     </form>
 
+    
+    
     <!-- Search Bar - End -->
 
     <!-- Search Results - Start -->
     <h4> Search results: </h4>
     
-    <ul>
+    <div class="TT-container-results container d-inline-flex justify-content-center align-items-center rounded-1">
+        Number of results: {{ results|length }}
+    </div>
+
+    <div class="container overflow-hidden text-center ">
+        <div class="row g-5 gy-5">
+            <div class="col-3 justify-content-center">
+                <div class="p-3 TT-container-results rounded-3">
+                    Number of results: {{ results|length }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="..." class="card-img" alt="...">
+        <div class="card-img-overlay">
+          
+        </div>
+    </div>
+
+    <div class="card text-center">
+        <h5 class="card-header">Featured</h5>
+        <div class="card-body">
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        </div>
+        <div class="card-footer text-muted">
+           <!-- Could add more dat form the obj here-->>
+        </div>
+    </div>
+
+    <div class="container-md">
+        {% if results %}
+            {% for obj in results %}
+                <div class="card m-2" style="max-width: 100%;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            {% if obj.image != None and obj.image != '' %}
+                                <img src="{{ obj.image.url }}" class="img-fluid rounded-1" height="auto" alt="Image of {{ obj.name }}">
+                            {% else %}
+                                <img src="{% static 'logoTT_sample2.png' %}" class="img-fluid rounded-1" height="auto" alt="Image of {{ obj.name }}">
+                            {% endif %}
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <div class="row">
+                                    <h5 class="card-title">{{ obj.name }}</h5>
+                                </div>
+                                <div class="row overflow-auto" style="max-height: 70%;">
+                                    <p class="card-text">{{ obj.description }}</p>
+                                </div>
+                                <div class="row">
+                                    <p class="card-text"><small class="text-muted">Price: {{ obj.price }}</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    
+    
+    <div class="container-md">
+        {% if results %}
+            {% for obj in results %}
+                <div class="METTtable row justify-content-center align-items-center rounded-1 m-2">
+                    <div class="METTtable-col col-md-2 rounded-1" >
+                        {% if obj.image != None and obj.image != '' %}
+                            <img src="{{ obj.image.url }}" class="img-fluid  border rounded-1" width="100%" height="auto" alt="Image of {{ obj.name }}">
+                        {% else %}
+                            <img src="{% static 'logoTT_sample2.png' %}" class="img-fluid  border rounded-1" width="100%" height="auto" alt="Image of {{ obj.name }}">
+                        {% endif %}
+                    </div>
+                    <div class="METTtable-col col-md rounded-1">
+                        {{ obj.name }}
+                    </div>
+                    <div class="METTtable-col col-md rounded-1">
+                        Price:{{ obj.price }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <ul class="row g-3 d-flex justify-content-center align-items-center m-2">
         {% if results %}
         Number of results: {{ results|length }}
             {% for obj in results %}
             <li>
-                {{ obj.name }} | {{ obj.description }} | {{ obj.rank }}
+                {{ obj.name }} | 
+                {{ obj.description }} | 
+                {% if obj.image != None and obj.image != '' %}
+                    <div class="row m-2"> 
+                        <div class="col-4">
+                            <img src="{{ obj.image.url }}" class="img-fluid" alt="Image of {{ obj.name }}">
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="row m-2"> 
+                        <div class="col-4">
+                            <img src="{% static 'logoTT_sample2.png' %}" class="img-fluid" alt="Image of {{ obj.name }}">
+                        </div>
+                    </div>
+                {% endif %} |
+                {{ obj.rank }}
             </li>
             {% endfor %}
         {% endif %}
     </ul>
+    
     <!-- Search Results - End -->
 
 {% endblock content_test %}

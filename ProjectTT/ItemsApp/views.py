@@ -12,6 +12,45 @@ from .models import ModelProduct
 
 # Create your views here.
 
+# # # # # #
+# THIS VIEW ONLY FOR TESTING AND DEBUGGING
+#
+#
+
+def viewTest(request, *args, **kwargs): ##### WIP - Currently working on
+    currentUser = str(request.user)
+    flagAuthenticated = str(request.user.is_authenticated)
+    s2 = str(args)
+    s3 = str(kwargs)
+    userAndArgsInfo = "User: " + currentUser + " || Authenticated: " + flagAuthenticated + " || Args: " + s2 + " || Keyword Args: " + s3
+    
+    q = request.GET.get('qT')
+
+    if q:
+        vectorSet = SearchVector('name', 'category', 'description', 'manufacturer')
+        outQuery = SearchQuery(q)
+
+        #Grab objects from ModelProduct, 
+        # who's data matches with the string provided in the search form inside the template, 
+        # prioritizing 'name', 'category', 'description'and lastly 'manufacturer' as the data used to make the order in which they are displayed,
+        # filter out and remove any results that have a rank score GREATER THAN or EQUAL to 0.001,
+        # and then order the results by their final rank score.
+        objSet = ModelProduct.objects.annotate(rank=SearchRank(vectorSet, outQuery)).filter(rank__gte=0.001).order_by('-rank')
+    else:
+        objSet = None
+
+    context = {
+        "dingus": userAndArgsInfo,
+        "results": objSet,
+    }
+
+    return render(request, "test.html", context)
+
+#
+#
+#
+# # # # # #
+
 def viewProductCreate(request, *args, **kwargs):
     currentUser = str(request.user)
     flagAuthenticated = str(request.user.is_authenticated)
@@ -74,7 +113,12 @@ def viewProductSearch(request, *args, **kwargs): ##### WIP - Currently working o
         vectorSet = SearchVector('name', 'category', 'description', 'manufacturer')
         outQuery = SearchQuery(q)
 
-        objSet = ModelProduct.objects.annotate(rank=SearchRank(vectorSet, outQuery)).order_by('-rank')
+        #Grab objects from ModelProduct, 
+        # who's data matches with the string provided in the search form inside the template, 
+        # prioritizing 'name', 'category', 'description'and lastly 'manufacturer' as the data used to make the order in which they are displayed,
+        # filter out and remove any results that have a rank score GREATER THAN or EQUAL to 0.001,
+        # and then order the results by their final rank score.
+        objSet = ModelProduct.objects.annotate(rank=SearchRank(vectorSet, outQuery)).filter(rank__gte=0.001).order_by('-rank')
     else:
         objSet = None
 
@@ -83,4 +127,4 @@ def viewProductSearch(request, *args, **kwargs): ##### WIP - Currently working o
         "results": objSet,
     }
 
-    return render(request, "test.html", context)
+    return render(request, "home.html", context)
