@@ -2,47 +2,48 @@
 {% load static %}
 
 {% block content_productInfo %}
-    <h4>
-        {{ dingus }}
-    </h4>
     <h1>
-        Create a new Product entry:
+        Enter new product details:
     </h1>
-    <form action='.' method='POST'> {% csrf_token %}
+    <form action='.' method='POST' enctype="multipart/form-data"> {% csrf_token %}
 
-        
-            {% for field in keyForm %} <!-- Iteratively render fields -->
-                {% if field.label == "Image"  %}
+        <div class="container-md">
+            <!-- Iteratively render fields -->
+            {% for field in keyForm %} 
+                {% if field.label == "Image" %}
                 <div class="row m-2"> 
                     <div class="col-2">
                         <label>{{field.label}}</label>
-                        <p>{{field}} </p>
+                        <p>{{field}}</p>
                     </div>
                 </div>
                 {% elif field.label == "Release date" %}
                 <div class="row m-2"> 
                     <div class="col-sm-4">
                         <label>{{field.label}}</label>
-                        <p>{{field}} </p>
+                        <p>{{field}}</p>
                     </div>
                 </div>
                 {% else %}
                 <div class="row m-2"> 
                     <div class="col-md-auto">
                         <label>{{field.label}}</label>
-                        <p>{{field}} </p>
+                        <p>{{field}}</p>
                     </div>
                 </div>
                 {% endif %}
             {% endfor %}
         </div>
 
-        <div class="row mb-3 m-2"> <!-- Attempts to execute a POST method to create new product entry in DB-->
-            <div class="col-md-4 ">
-                <input class="btn btn-success" type='submit' value = 'Save' />
+        <div class="container-md">
+            <div class="row mb-3 m-2"> <!-- Attempts to execute a POST method to create new product entry in DB-->
+                <div class="col-md-4 ">
+                    <input class="btn btn-success" type='submit' value='Save'/>
+                </div>
             </div>
         </div>
     </form>
+
 {% endblock content_productInfo %}
 
 

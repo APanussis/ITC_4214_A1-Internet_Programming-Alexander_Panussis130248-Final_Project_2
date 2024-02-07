@@ -1,12 +1,22 @@
+import pathlib
+import uuid
+
 from django.db import models
 from decimal import Decimal 
 from django.core.validators import MinValueValidator
 
 # Create your models here.
 
+#Using 'pathlib'
+def product_image_upload_handler(instance, filename): #upload files to seperate DIR so that same-name files dont overlap/overwrite eachother
+    fpath = pathlib.Path(filename)
+    newFileName = str(uuid.uuid1()) #uuid1 is uuid with time/datetime
+    return f"productImages/{newFileName}{fpath.suffix}" #{fpath.suffix} includes file-name ending suffixes like .png and .jpg
+
+
 class ModelProduct(models.Model):   #inherits from default python class "Model"
     name = models.CharField(max_length = 60, unique = True)
-    image = models.ImageField(blank=True, null=True, upload_to="productImages/")
+    image = models.ImageField(blank=True, null=True, upload_to=product_image_upload_handler)
     description = models.TextField(blank = True, null = True)
     category = models.CharField(max_length = 20)
     release_date = models.DateField(blank=True, null = True)

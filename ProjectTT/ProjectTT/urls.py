@@ -31,10 +31,10 @@ urlpatterns = [
     path('cart/', viewCart, name='cart'),
 
     #ItemsApp
-    path('', include('ItemsApp.urls')), ##### fix this!
+    path('shop/', include('ItemsApp.urls')), ##### fix this!
 
     #UsersApp
-    path('', include('UsersApp.urls')), ##### fix this!
+    path('users/', include('UsersApp.urls')), ##### fix this!
     
     #Default Django
     path('admin/', admin.site.urls),

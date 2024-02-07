@@ -1,0 +1,7 @@
+python 3.x
+django 3.x
+postgresSQL 16
+psycopg2
+dataclasses
+pillow (Python Image Library - PIL)
+django.contrib.postgres

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content_login %}
+
+    <h1>Login</h1>
+
+    <!--Using 'context processors' from 'TEMPLATES' inside of settings.py-->
+
+    {% if not request.user.is_authenticated %}
+        <div class="row m-3 m-2">
+            <div class="col-md-4 ">
+                <form method='POST'> {% csrf_token %}
+                    {% if errorInvalidUorP %}
+                    <div class="m-3">
+                        <h5 style='color: red;'>{{ errorInvalidUorP }}</h5>
+                    </div>
+                    {% endif %}
+                    <div class="m-3">
+                        <input type='text' name='username' placeholder="Username..."/>
+                    </div>
+                    <div class="m-3">
+                        <input type='password' name='password' placeholder="Password..."/>
+                    </div>
+                    <div class="m-3">
+                        <input class="btn btn-success" type='submit' value='Login'/>
+                    </div>
+                </form>
+                <div class="m-3">
+                    <a href="{% url 'signup' %}">  
+                        <button class="btn btn-success">Sign-Up</button> <!-- click this button to go to signup page.-->
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="row m-3 m-2"> 
+            <div class="col-md-4 ">
+                <div class="m-3">
+                    <h5 style='color: darkgreen;'>You are already logged in.</h5>
+                </div>
+                <div class="m-3">
+                    <p>Would you like to logout?</p>
+                </div>
+                <div class="m-3">
+                    <a href="{% url 'logout' %}">
+                        <input class="btn btn-danger" type='submit' value='Logout'/> <!-- Option to logout if trying to access the Login page while aready logged in.-->
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock content_login %}

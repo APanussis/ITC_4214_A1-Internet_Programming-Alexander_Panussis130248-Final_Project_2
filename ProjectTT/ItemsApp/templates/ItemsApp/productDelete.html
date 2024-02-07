@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content_productInfo %}
+
+    <h1 style='color: darkred;'>Confirm Deletion</h1>
+
+    <!--Using 'context processors' from 'TEMPLATES' inside of settings.py-->
+    {% if request.user.is_authenticated %}
+        <div class="row m-3 m-2">
+            <div class="col-md-4 ">
+                <form method='POST'> {% csrf_token %}
+                    <div class="m-3">
+                        <h5 style='color: darkred;'>Are you sure you want to PERMANTLY DELETE {{ keyObj.name }}?</h5>
+                    </div>
+                    <div class="m-3">
+                        <input class="btn btn-success" type='submit' value='Yes, Delete it.'/> <!-- Option to log back in.-->
+                    </div>
+                </form>
+            </div>
+        </div>
+    {% else %}
+        <div class="row m-3 m-2">
+            <div class="col-md-4 ">
+                <div class="m-3">
+                    <h5 style='color: darkred;'>You are not logged in.</h5>
+                </div>
+                <div class="m-3">
+                    <p>Would you like to login?</p>
+                </div>
+                <div class="m-3">
+                    <a href="{% url 'login' %}">
+                        <input class="btn btn-success" type='submit' value='Login'/> <!-- Option to log back in.-->
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock content_productInfo %}

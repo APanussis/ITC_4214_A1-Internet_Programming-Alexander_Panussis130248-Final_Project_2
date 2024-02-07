@@ -3,10 +3,7 @@
 
 {% block content_home %}
     <h1>Home</h1>
-    {{ dingus }}
-    <p>Too much information will now be provided bellow:</p>
-    
-    
+    {{ sessionInfo }}    
 
     {% block content_top_page %}
     {% endblock content_top_page %}
@@ -20,7 +17,7 @@
                 <input class="form-control" type="text" name="qT">
             </div>
             <div class="col-sm-2">
-                <button class="btn nav-link" type="submit">Search</button>
+                <button class="btn" type="submit">Search</button>
             </div>
         </div>
     </form>
@@ -47,9 +44,9 @@
     <div class="container-md">
         {% if results %}
             {% for obj in results %}
-                <div class="card m-2" style="max-width: 100%;">
+                <a href="{% url 'productInfo' id=obj.id %}" class="METTtable card linkCard m-2">
                     <div class="row g-0">
-                        <div class="col-md-4">
+                        <div class="col-md-4 mw-34">
                             {% if obj.image != None and obj.image != '' %}
                                 <img src="{{ obj.image.url }}" class="img-fluid rounded-1" height="auto" alt="Image of {{ obj.name }}">
                             {% else %}
@@ -66,24 +63,19 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
-                                        <p class="card-text"><small class="text-muted">Price: {{ obj.price }}</small></p>
+                                        <p class="card-text"><small class="text">Price: {{ obj.price }}</small></p>
                                     </div>
                                     <div class="col">
-                                        <p class="card-text"><small class="text-muted">No. of items in stock: {{ obj.current_stock }}</small></p>
+                                        <p class="card-text"><small class="text">No. of items in stock: {{ obj.current_stock }}</small></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
             {% endfor %}
         {% endif %}
     </div>
-    
-    
-    
-
-    
     
     <!-- Search Results - End -->
 

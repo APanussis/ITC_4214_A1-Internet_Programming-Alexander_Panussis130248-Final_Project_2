@@ -2,49 +2,80 @@
 {% load static %}
 
 {% block content_productInfo %}
-    <h4>
-        {{ dingus }}
-    </h4>
     <h1>
         Currently looking at: {{ keyObj.name }}
     </h1>
+    <hr>
 
-    {% if keyObj.image != None and keyObj.image != '' %}
-        <div class="row m-2"> 
-            <div class="col-4">
-                <img src="{{ keyObj.image.url }}" class="img-fluid" alt="Image of {{ keyObj.name }}">
+    <div class="container-md bg-transparent">
+        <div class="row g-0 m-2 justify-content-between">
+            <div class="d-flex col-md-2 flex-shrink-2">
+                <a href="{% url 'home' %}" class="btn justify-content-start text-center">Back to Search</a>
+            </div>
+            <div class="col"></div>
+            <div class="d-flex col-md-2 flex-shrink-2 justify-content-end">
+                <div class="d-flex row g-0 text-center">
+                    <div class="col flex-shrink-2">
+                        <div class="placeholder-wave rounded-1">
+                            <a href="{% url 'home' %}" class="btn btnBuy mx-2 rounded-pill text-center">Buy</a>
+                        </div>
+                    </div>
+                    <div class="col flex-shrink-2">
+                        <a href="{% url 'home' %}" class="btn text-center">Cart</a>
+                    </div>
+                </div>
             </div>
         </div>
-    {% else %}
-        <div class="row m-2"> 
-            <div class="col-4">
-                <img src="{% static 'logoTT_sample2.png' %}" class="img-fluid" alt="Image of {{ keyObj.name }}">
+    </div>
+
+    {% if user.is_authenticated %}
+    <div class="container-md bg-transparent">
+        <div class="row g-0 m-2 justify-content-between">
+            <div class="d-flex col-md-2 flex-shrink-2">
+                <div class="btn-group flex-fill">
+                    <a href="{% url 'productEdit' id=keyObj.id %}" class="btn">Edit Product</a> <!-- Only for 'staff' and 'superuser' flagged users.-->
+                </div>
             </div>
         </div>
+    </div>
     {% endif %}
 
-    <ul>
-        <li>
-            Description:
-            <p>
-                {{ keyObj.description }}
-            </p>
-        </li>
-        <hr>
-        <li>
-            Category: {{keyObj.category}}
-        </li>
-        <li>
-            Release date: {{keyObj.releaseDate}}
-        </li>
-        <li>
-            Currently available: {{keyObj.currentStock}}
-        </li>
-        <li>
-            Manufacturer: {{keyObj.manufacturer}}
-        </li>
-        <li>
-            Price: {{keyObj.price}}
-        </li>
-    </ul>
+    <div class="container-md">
+        <div class="METTtable card m-2">
+            <div class="row g-0">
+                <div class="col-md-4 mw-34">
+                    {% if keyObj.image != None and keyObj.image != '' %}
+                        <img src="{{ keyObj.image.url }}" class="img-fluid rounded-1" height="auto" alt="Image of {{ keyObj.name }}">
+                    {% else %}
+                        <img src="{% static 'logoTT_sample2.png' %}" class="img-fluid rounded-1" height="auto" alt="Image of {{ keyObj.name }}">
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <div class="card-header">{{ keyObj.name }}</div>
+                        <ul class="list-group list-group-flush rounded-1">
+                            <li class="list-group-item">
+                                <p class="card-text">No. of items in stock: {{ keyObj.current_stock }}</p>
+                            </li>
+                            <li class="list-group-item">
+                                <p class="card-text">Manufacturer: {{keyObj.manufacturer}}</p>
+                            </li>
+                            <li class="list-group-item">
+                                <p class="card-text">Category: {{keyObj.category}}</p>
+                            </li>
+                            <li class="list-group-item">
+                                <p class="card-text">Release date: {{keyObj.release_date}}</p>
+                            </li>
+                            <li class="list-group-item overflow-auto" style="max-height: 70%;">
+                                <p class="card-text">{{ keyObj.description }}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
 {% endblock content_productInfo %}

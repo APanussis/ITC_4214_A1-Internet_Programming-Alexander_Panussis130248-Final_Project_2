@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content_login %}
+
+    <h1>Sign-Up</h1>
+
+    <div class="row m-3 m-2">
+        <div class="col-md-4 ">
+            <form method="post">
+                <div class="m-3">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                </div>
+                <div class="m-3">
+                    <input class="btn btn-success" type='submit' value = 'Sign-Up' />
+                </div>
+            </form>
+            <div class="m-3">
+                <a href="{% url 'login' %}">  <!-- Send to signup page.-->
+                    <button class="btn btn-success">Back to Login</button>
+                </a>
+            </div>
+        </div>
+    </div> 
+    
+{% endblock content_login %}

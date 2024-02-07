@@ -1,9 +1,17 @@
 /* 
 color pallete reference:
 #004580 blue
+#3174ad in-between blue and skyblue
 #7fc4e1 skyblue
 #E33636 burgundy red
 #E58F2B sandy ochra yellow
+
+Gold:
+#e2c479 bright <-wave
+#debd68 light
+#dbb658 medium <- main
+#c5a34f dim
+#af9146 dark <-shadow
 
 #4b2a54 dark mode purple
 #ffe600 canary yellow
@@ -11,25 +19,6 @@ color pallete reference:
 #651D77 purple
 */
 
-/* Carousel css and card css*/
-
-.carousel-inner {
-    max-width: 300px; /* Adjust the width as needed */
-    margin: auto; /* This centers the carousel if the container is bigger */
-}
-
-.carousel-caption {
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for text */
-    color: #E58F2B;
-}
-
-.card {
-    box-shadow: 0 0 15px #651D77; /* Adds a subtle shadow to cards */
-}
-
-.card-title {
-    color: #E58F2B;
-}
 
 /* Overall Project */
 
@@ -72,6 +61,40 @@ h4 {
     padding: 3;
 }
 
+a {
+    color: #004580;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+
+
+/* Carousel css and card css*/
+
+.carousel-inner {
+    max-width: 300px; /* Adjust the width as needed */
+    margin: auto; /* This centers the carousel if the container is bigger */
+}
+
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for text */
+    color: #E58F2B;
+}
+
+.card {
+    box-shadow: 0 0 15px #651D77; /* Adds a subtle shadow to cards */
+}
+
+.card-header {
+    background-color: #E58F2B;
+}
+
+
+/* Extra customizations */
+
 .table {
     border-color: #004580;
     border: 4px #E33636;
@@ -110,20 +133,39 @@ h4 {
     color: #004580;
 }
 
+.btnBuy {
+    background-color: #dbb658;
+    color: #004580;
+}
+
+.btn:hover {
+    color: #ffffff !important;
+}
+
 .btn .nav-link:hover {
     color: #ffffff !important;
 }
 
 .TT-container-results {
     background-color: #E33636;
-    color: #2ea376;
+    color: #025f3b;
 }
 
 .METTtable {
-    background-color: #E58F2B;
+    background-color: #3174ad;
+}
+
+.linkCard:hover {
+    color: #E58F2B !important;
+    text-decoration: none;
 }
 
 .METTtable-col {
     background-color: #E33636;
     color: #004580; 
+}
+
+.placeholder-wave {
+    background-color: #af9146 !important;
+    color: #e2c479 !important;
 }

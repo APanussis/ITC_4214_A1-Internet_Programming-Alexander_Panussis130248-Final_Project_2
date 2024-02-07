@@ -1,49 +1,70 @@
 from PIL import Image
 import datetime
 from django import forms
+from django.forms import ValidationError
+from django.utils.translation import gettext_lazy as _
 from django.core.files.uploadedfile import SimpleUploadedFile
 
-from .models import ModelUser
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
+from django.contrib.auth import password_validation
+from django.contrib.auth.validators import UnicodeUsernameValidator
 
-class FormProfileCreate(forms.ModelForm):
-    name                    = forms.CharField(max_length = 60)
-    email                   = forms.EmailField()
-    image                   = forms.ImageField(required=False) 
-    description             = forms.CharField(widget=forms.Textarea, required=False)    #TextArea widget to give the user space 
-                                                                                        #to write something more than a single sentence.
+username_validator = UnicodeUsernameValidator()
+
+####
+
+class FormLogin(AuthenticationForm):
+    username = UsernameField(label='Username', widget=forms.TextInput(attrs={'class':'form-control'}))
+    password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class':'form-control'}))
     
-    # date_joined               = forms.DateField(                          # SHOULD BE AUTOMATED 
-    #                                 initial=datetime.date.today,
-    #                                 widget= forms.DateInput 
-    #                                     (attrs=
-    #                                         {                       
-    #                                             'type':'date',
-    #                                             'class': 'form-control',
-    #                                             'cols': 30,
-    #                                         }
-    #                                     )
-    #                                 )
+    def confirm_login_allowed(self, user):
+        if user.is_staff and not user.is_superuser:
+            raise ValidationError(
+                ("This account is not allowed here."),
+                code='not_allowed',
+            )
 
-    age                     = forms.IntegerField(min_value=0, required=False)  
-    #orders_made             = forms.IntegerField(min_value=0, default=0)    # SHOULD BE AUTOMATED 
+####
 
-    #REFERENCE MODEL
-    # name = models.CharField(max_length = 60, unique = True)
-    # email = models.EmailField(blank=False, null = False, unique = True)
-    # image = models.ImageField(blank=True, null=True, upload_to="userImages/")
-    # description = models.TextField(blank = True, null = True)
-    # date_joined = models.DateField(blank=False, null = False)
-    # age = models.PositiveIntegerField(blank = True, null = True, default=0)
-    # orders_made = models.PositiveIntegerField(default=0)
+class FormSignup(UserCreationForm):
+    
+    username = forms.CharField(
+        label=_('Username'),
+        max_length=32,
+        help_text=_('Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'),
+        validators=[username_validator],
+        error_messages={'unique': _("A user with that username already exists.")},
+        widget=forms.TextInput(attrs={'class': 'form-control'})
+    )
 
+    email = forms.EmailField(max_length=50, help_text='Valid e-mail is equired.',
+                             widget=(forms.TextInput(attrs={'class': 'form-control'})))
+    
+    password1 = forms.CharField(label=_('Password'),
+                                widget=(forms.PasswordInput(attrs={'class': 'form-control'})),
+                                help_text=password_validation.password_validators_help_text_html())
+    
+    password2 = forms.CharField(label=_('Repeat Password'), widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+                                help_text=_('Enter the same password to confirm it.'))
+    
+
+    first_name = forms.CharField(max_length=60, min_length=4, required=False, help_text='Optional',
+                                widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Optional'}))
+    
+    last_name = forms.CharField(max_length=60, min_length=4, required=False, help_text='Optional',
+                               widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Optional'}))
+    
     class Meta:
-        model = ModelUser
+        model = User
         fields = [
-            'name',
+            'username',
             'email',
-            'image',
-            'description',
-            #'date_joined',
-            'age',
-            #'orders_made',
+            'password1',
+            'password2',
+            'first_name',
+            'last_name',
         ]
+    
+
+    
