@@ -53,7 +53,16 @@
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <div class="card-header">{{ keyObj.name }}</div>
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col">
+                                    {{ keyObj.name }}
+                                </div>
+                                <div class="col-2 p-1 btnBuy text-center rounded-1">
+                                    {{ keyObj.price }}
+                                </div>
+                            </div>
+                        </div>
                         <ul class="list-group list-group-flush rounded-1">
                             <li class="list-group-item">
                                 <p class="card-text">No. of items in stock: {{ keyObj.current_stock }}</p>
