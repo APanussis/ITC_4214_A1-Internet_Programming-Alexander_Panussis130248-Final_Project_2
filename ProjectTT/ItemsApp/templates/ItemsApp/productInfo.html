@@ -33,7 +33,8 @@
         <div class="row g-0 m-2 justify-content-between">
             <div class="d-flex col-md-2 flex-shrink-2">
                 <div class="btn-group flex-fill">
-                    <a href="{% url 'productEdit' id=keyObj.id %}" class="btn">Edit Product</a> <!-- Only for 'staff' and 'superuser' flagged users.-->
+                    <a href="{% url 'productEdit' id=keyObj.id %}" class="btn">Edit</a> <!-- Only for 'staff' and 'superuser' flagged users.-->
+                    <a href="{% url 'productDelete' id=keyObj.id %}" class="btn">Delete</a>
                 </div>
             </div>
         </div>

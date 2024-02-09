@@ -2,9 +2,11 @@ import datetime
 import time
 
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 from .forms import FormProduct, FormSearch
 from .models import ModelProduct
@@ -97,7 +99,6 @@ def viewProductInfo(request, id): #View with 'Dynamic Lookup' functionality wher
 
     return render(request, "ItemsApp/productInfo.html", context)
 
-### WIP - Working, but might need refinement
 @login_required
 def viewProductEdit(request, id):
     objRetrieved = None
@@ -119,6 +120,20 @@ def viewProductEdit(request, id):
     }
     return render(request, "ItemsApp/productEdit.html", context)
 
+### WIP
+@login_required
+def viewProductDelete(request, id):
+    objRetrieved = None
+    if id is not None:
+        objRetrieved = ModelProduct.objects.get(id=id)
+        if request.method == "POST":
+            objRetrieved.delete()
+            return HttpResponseRedirect(reverse("home"))
+
+    context = {
+        "keyObj": objRetrieved,
+    }
+    return render(request, "ItemsApp/productDelete.html", context)
 
 #                                ╔═════════════════════════════════╗
 # ═══════════════════════════════╣ Unused/Deprecated Code Snippets ╠═══════════════════════════════

@@ -5,7 +5,6 @@
 
     <h1 style='color: darkred;'>Confirm Deletion</h1>
 
-    <!--Using 'context processors' from 'TEMPLATES' inside of settings.py-->
     {% if request.user.is_authenticated %}
         <div class="row m-3 m-2">
             <div class="col-md-4 ">
@@ -14,9 +13,16 @@
                         <h5 style='color: darkred;'>Are you sure you want to PERMANTLY DELETE {{ keyObj.name }}?</h5>
                     </div>
                     <div class="m-3">
-                        <input class="btn btn-success" type='submit' value='Yes, Delete it.'/> <!-- Option to log back in.-->
+                        <input class="btn btn-warning" type='submit' value='Yes, Delete it.'/> 
                     </div>
                 </form>
+            </div>
+            <div class="col-md-4 ">
+                <div class="m-3">
+                    <a href="{% url 'productInfo' id=keyObj.id %}">
+                        <input class="btn btn-success" type='submit' value='No. Go back.'/>
+                    </a>
+                </div>
             </div>
         </div>
     {% else %}

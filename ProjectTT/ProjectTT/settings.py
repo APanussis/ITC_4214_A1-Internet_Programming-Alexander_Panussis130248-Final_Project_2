@@ -97,8 +97,8 @@ DATABASES = {
     'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'DB_ProjectTT',
-            'USER': 'postgres',
-            'PASSWORD': '`Txgjvugn0',
+            'USER': 'userProjectTT',    #This needs to change when deployment
+            'PASSWORD': '9036c2E5',     #Change this to something more secure during deployment
             'HOST': 'localhost',
             'PORT': '5432',
     }
