@@ -101,8 +101,8 @@ def viewProfileEdit(request):
 def viewProfile(request, id):
     userRetrieved = None
     if id is not None:
-        userRetrieved = User.objects.get(id=id)
-        userExtRetrieved = ModelProfile.objects.get(user=id)
+        userRetrieved = User.objects.get(pk=id)
+        userExtRetrieved = ModelProfile.objects.get(user_id=id)
 
     context = {
         "keyObj": userRetrieved,

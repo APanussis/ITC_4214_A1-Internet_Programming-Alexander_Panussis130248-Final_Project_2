@@ -96,7 +96,7 @@ WSGI_APPLICATION = 'ProjectTT.wsgi.application'
 DATABASES = {
     'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'DB_ProjectTT2',
+            'NAME': 'DB_ProjectTT3',
             'USER': 'userProjectTT',    #Change this to something more secure in case of deployment/production
             'PASSWORD': '9036c2E5',     #Change this to something more secure in case of deployment/production
             'HOST': 'localhost',
