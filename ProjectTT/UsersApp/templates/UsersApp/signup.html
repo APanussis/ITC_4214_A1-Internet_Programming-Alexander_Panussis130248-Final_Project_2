@@ -7,20 +7,59 @@
 
     <div class="row m-3 m-2">
         <div class="col-md-4 ">
-            <form method="post">
+            {% if not request.user.is_authenticated %}
+                <form method='POST'>{% csrf_token %}
+                    <div class="m-3">
+                        {% if errorMsg %}
+                            <div class="m-3">
+                                <h5 style='background-color: black; color: red;'>{{ errorMsg }}</h5>
+                            </div>
+                        {% endif %}
+                        {% for field in keyForm %}
+                            <div class="row m-2"> 
+                                <div class="col-md-auto">
+                                    <label>{{field.label}}</label>
+                                    <p>{{field}}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="m-3">
+                        <div class="row m-2">
+                            <div class="col-md-auto">
+                                <input class="btn btn-success" type='submit' value='Sign-Up'/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                 <div class="m-3">
-                    {% csrf_token %}
-                    {{form.as_p}}
+                    <div class="row m-2">
+                        <div class="col-md-auto">
+                            <a href="{% url 'login' %}">
+                                <button class="btn btn-success">Back to Login</button>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="m-3">
-                    <input class="btn btn-success" type='submit' value = 'Sign-Up' />
+            {% else %}
+                <div class="row m-3 m-2"> 
+                    <div class="m-3">
+                        <h5 style='color: rgb(136, 97, 0);'>You are already logged in and registered.</h5>
+                    </div>
+                    <div class="m-3">
+                        <p>Would you like to go back to the shop?</p>
+                        <a href="{% url 'home' %}">
+                            <button class="btn btn-success">Back to Homepage</button>
+                        </a>
+                    </div>
+                    <div class="m-3">
+                        <p>Would you like to logout?</p>
+                        <a href="{% url 'logout' %}">
+                            <input class="btn btn-danger" type='submit' value='Logout'/>
+                        </a>
+                    </div>
                 </div>
-            </form>
-            <div class="m-3">
-                <a href="{% url 'login' %}">  <!-- Send to signup page.-->
-                    <button class="btn btn-success">Back to Login</button>
-                </a>
-            </div>
+            {% endif %}
         </div>
     </div> 
     

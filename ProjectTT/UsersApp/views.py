@@ -1,51 +1,112 @@
 import datetime
 import random
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.db import transaction
 
-from django.contrib.auth.models import User
-#from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 
 from django.contrib import messages
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView
-from .forms import FormLogin, FormSignup
+
+from .models import ModelProfile
+from .forms import FormLogin, FormSignup, FormUser, FormProfile
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 
-#from .forms import FormUserCreate
 
 # Create your views here.
 
 
+def viewCustomSignup(request):
+    form = UserCreationForm(request.POST or None)
+    if form.is_valid():
+        userObj = form.save()
+        return HttpResponseRedirect(reverse("login"))
+    return render(request, 'UsersApp/signup.html', {"keyForm": form})
+
 def viewCustomLogin(request):
     if request.method == "POST":
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password) #Run django's built-in "authenticate" method
-        if user is None: #If username or password does not match an existing registered user, throw error "errorInvalidUorP".
-            context = {
-                "errorInvalidUorP": "Invalid username or password."
-            }
-            return render(request, 'UsersApp/login.html', context)
-        login(request,user)
-        return render(request, 'ItemsApp/home.html') #cant use 'return redirect' within the view method, use 'request' instead
-    return render(request, 'UsersApp/login.html', {})
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return HttpResponseRedirect(reverse("home"))
+    else:
+        form = AuthenticationForm(request)
 
+    context = {
+        "keyForm": form,
+    }
+    return render(request, 'UsersApp/login.html', context)
+
+@login_required
 def viewCustomLogout(request):
     if request.method == "POST":
         logout(request)
         return render(request, 'ItemsApp/home.html') #cant use 'return redirect' within the view method, use 'request' instead
     return render(request, 'UsersApp/logout.html', {})
 
-def viewCustomSignup(request):
-    return render(request, 'UsersApp/signup.html', {})
+@login_required
+@transaction.atomic
+def viewProfileEdit(request):
+    if request.method == 'POST':
+        user_form = FormUser(request.POST, instance=request.user)
+        profile_form = FormProfile(request.POST, instance=request.user.modelprofile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return HttpResponseRedirect(reverse("profile")) # Redirect back to profile page
+        else:
+            messages.error(request, f'Please correct the error below.')
+    else:
+        user_form = FormUser(instance=request.user)
+        profile_form = FormProfile(instance=request.user.modelprofile)
+    return render(request, 'UsersApp/profileEdit.html', {
+        'keyUUForm': user_form,
+        'keyProfUForm': profile_form
+    })
+# ####################################################################################################################################
+# @login_required # JUST MAKE A SIMPLE auth.User Model extension and send E-MAIL TO PROFESSOR FOR HELP
+# def viewProfile(request):
+    
+# ####################################################################################################################################
+#     if request.method == 'POST':
+#         uUpdateForm = FormUserUpdate(request.POST, instance=request.user)
+#         profUpdateForm = FormProfileUpdate(request.POST, request.FILES, instance=request.user.ModelProfile)
+#         if uUpdateForm.is_valid() and profUpdateForm.is_valid():
+#             uUpdateForm.save()
+#             profUpdateForm.save()
+#             messages.success(request, f'Your account has been updated!')
+#             return HttpResponseRedirect(reverse("profile")) # Redirect back to profile page
+
+#     else:
+#         uUpdateForm = FormUserUpdate(instance=request.user)
+#         profUpdateForm = FormProfileUpdate(instance=request.user.profile)
+
+#     context = {
+#         'keyUUForm': uUpdateForm,
+#         'keyProfUForm': profUpdateForm
+#     }
+
+#     return render(request, 'users/profile.html', context)
+# ####
 
 @login_required
-def viewProfile(request):
+def viewProfile(request, id):
+    userRetrieved = None
+    if id is not None:
+        userRetrieved = User.objects.get(id=id)
+        userExtRetrieved = ModelProfile.objects.get(user=id)
+
     context = {
+        "keyObj": userRetrieved,
+        "keyObjExt": userExtRetrieved,
     }
     return render(request, "UsersApp/profile.html", context)    
 
@@ -181,3 +242,20 @@ def viewProfileList(request, *args, **kwargs):
 #         form = FormLogin()
         
 #     return render(request, 'UsersApp/login.html', {'form': form})
+
+#╔══════════════════╗
+#╣ CODE SNIPPET(6*) ╠
+#╚══════════════════╝
+# def viewCustomLogin(request):
+#     if request.method == "POST":
+#         username = request.POST.get('username')
+#         password = request.POST.get('password')
+#         user = authenticate(request, username=username, password=password) #Run django's built-in "authenticate" method
+#         if user is None: #If username or password does not match an existing registered user, throw error "errorInvalidUorP".
+#             context = {
+#                 "errorInvalidUorP": "Invalid username or password."
+#             }
+#             return render(request, 'UsersApp/login.html', context)
+#         login(request,user)
+#         return render(request, 'ItemsApp/home.html') #cant use 'return redirect' within the view method, use 'request' instead
+#     return render(request, 'UsersApp/login.html', {})

@@ -11,16 +11,15 @@
         <div class="row m-3 m-2">
             <div class="col-md-4 ">
                 <form method='POST'> {% csrf_token %}
-                    {% if errorInvalidUorP %}
                     <div class="m-3">
-                        <h5 style='color: red;'>{{ errorInvalidUorP }}</h5>
-                    </div>
-                    {% endif %}
-                    <div class="m-3">
-                        <input type='text' name='username' placeholder="Username..."/>
-                    </div>
-                    <div class="m-3">
-                        <input type='password' name='password' placeholder="Password..."/>
+                        
+                        
+                            <div class="row"> 
+                                <div class="col-md-auto">
+                                    {{ keyForm.as_p }}
+                                </div>
+                            </div>
+                        
                     </div>
                     <div class="m-3">
                         <input class="btn btn-success" type='submit' value='Login'/>

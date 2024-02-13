@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import viewCustomLogin, viewCustomLogout, viewCustomSignup, viewProfile, viewProfileList
+from .views import viewCustomLogin, viewCustomLogout, viewCustomSignup, viewProfile, viewProfileEdit
 
 urlpatterns = [
     #path('', include("django.contrib.auth.urls")),
@@ -9,5 +9,6 @@ urlpatterns = [
     path('signup/', viewCustomSignup, name='signup'),
     
     path('profile/', viewProfile, name='profile'),
-    path('profileList/', viewProfileList, name='profileList'),
+    path('profileEdit/', viewProfileEdit, name='profileEdit'),
+    # path('profileList/', viewProfileList, name='profileList'),
 ]

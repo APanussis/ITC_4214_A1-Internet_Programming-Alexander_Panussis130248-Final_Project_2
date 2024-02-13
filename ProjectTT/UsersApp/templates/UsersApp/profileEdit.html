@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content_profile %}
+
+    <h1>{{ keyObj.username }}'s Profile Page</h1>
+    {{ keyObj.profile.image.url }}
+
+    <h1>
+        Currently editing: {{ keyObj.username }}
+    </h1>
+    <hr>
+
+    <div class="container-md bg-transparent">
+        <div class="row g-0 m-2 justify-content-between">
+            <div class="d-flex col-md-2 flex-shrink-2">
+                <a href="{% url 'home' %}" class="btn justify-content-start text-center">Back to Search</a>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+
+        <div class="container-md">
+            <!-- Iteratively render fields -->
+            {% for field in keyUUForm %}
+                {% if field.label == "Date joined" %}
+                <div class="row m-2"> 
+                    <div class="col-sm-4">
+                        <label>{{field.label}}</label>
+                        <p>{{field}}</p>
+                    </div>
+                </div>
+                {% else %}
+                <div class="row m-2"> 
+                    <div class="col-md-auto">
+                        <label>{{field.label}}</label>
+                        <p>{{field}}</p>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+
+            {% for field in keyProfUForm %}
+                {% if field.label == "Image" %}
+                <div class="row m-2"> 
+                    <div class="col-2">
+                        <label>{{field.label}}</label>
+                        <p>{{field}}</p>
+                    </div>
+                </div>
+                {% elif field.label == "Birth date" %}
+                <div class="row m-2"> 
+                    <div class="col-sm-4">
+                        <label>{{field.label}}</label>
+                        <p>{{field}}</p>
+                    </div>
+                </div>
+                {% else %}
+                <div class="row m-2"> 
+                    <div class="col-md-auto">
+                        <label>{{field.label}}</label>
+                        <p>{{field}}</p>
+                    </div>
+                </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="container-md">
+            <div class="row mb-3 m-2"> 
+                <div class="col-md-4 ">
+                    <a href="{% url 'profile' id=keyObj.id %}">
+                        <input class="btn btn-success" type='submit' value='Save'/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+{% endblock content_profile %}

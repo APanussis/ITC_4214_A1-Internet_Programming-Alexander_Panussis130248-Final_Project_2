@@ -5,6 +5,7 @@ from django.forms import ValidationError
 from django.utils.translation import gettext_lazy as _
 from django.core.files.uploadedfile import SimpleUploadedFile
 
+from .models import ModelProfile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
 from django.contrib.auth import password_validation
@@ -12,8 +13,19 @@ from django.contrib.auth.validators import UnicodeUsernameValidator
 
 username_validator = UnicodeUsernameValidator()
 
-####
+class FormUser(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')
 
+class FormProfile(forms.ModelForm):
+    class Meta:
+        model = ModelProfile
+        fields = ('image', 'bio', 'birth_date')
+
+# # # # #
+        
+#Backup Form class
 class FormLogin(AuthenticationForm):
     username = UsernameField(label='Username', widget=forms.TextInput(attrs={'class':'form-control'}))
     password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class':'form-control'}))
@@ -25,8 +37,8 @@ class FormLogin(AuthenticationForm):
                 code='not_allowed',
             )
 
-####
 
+#Backup Form class
 class FormSignup(UserCreationForm):
     
     username = forms.CharField(

@@ -24,20 +24,21 @@ from ZZPageManagerApp.views import viewCart
 
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     #ZZPageManagerApp
     # path('test/', viewTest, name='test'),
     # path('', viewHome, name='home'),
-    #path('navbar/', viewNavbar, name='navbar'), #DEPRECATED
+    #path('navbar/', viewNavbar, name='navbar'), 
     path('cart/', viewCart, name='cart'),
 
     #ItemsApp
-    path('shop/', include('ItemsApp.urls')), ##### fix this!
+    path('shop/', include('ItemsApp.urls')), 
 
     #UsersApp
-    path('users/', include('UsersApp.urls')), ##### fix this!
+    path('users/', include('UsersApp.urls')),
     
     #Default Django
-    path('admin/', admin.site.urls),
+    
 ]
 
 if settings.DEBUG:
