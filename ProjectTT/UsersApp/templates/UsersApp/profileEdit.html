@@ -22,24 +22,24 @@
 
     <form action='.' method="POST" enctype="multipart/form-data">{% csrf_token %}
 
-        <div class="container-md">
+        <div class="container-md bg-transparent">
             {% for field in keyFormUser %}
                 {% if field.label == "Image" %}
-                <div class="row m-2"> 
+                <div class="row g-0 m-2"> 
                     <div class="col-2">
                         <label>{{field.label}}</label>
                         <p>{{field}}</p>
                     </div>
                 </div>
                 {% elif field.label == "Birth date" %}
-                <div class="row m-2"> 
+                <div class="row g-0 m-2"> 
                     <div class="col-sm-4">
                         <label>{{field.label}}</label>
                         <p>{{field}}</p>
                     </div>
                 </div>
                 {% else %}
-                <div class="row m-2"> 
+                <div class="row g-0 m-2"> 
                     <div class="col-md-auto">
                         <label>{{field.label}}</label>
                         <p>{{field}}</p>
@@ -47,23 +47,29 @@
                 </div>
                 {% endif %}
             {% endfor %}
+            
             {% for field in keyFormProfile %}
                 {% if field.label == "Image" %}
-                <div class="row m-2"> 
-                    <div class="col-2">
+                <div class="row g-0 m-2"> 
+                    <div class="col-4">
                         <label>{{field.label}}</label>
                         <p>{{field}}</p>
                     </div>
+                    <div class="col p-2" style="border-left: solid;">
+                        {% if keyObj.modelprofile.image != None and keyObj.modelprofile.image != '' %}
+                            <img src="{{ keyObj.modelprofile.image.url }}" class="img-fluid rounded-1" width="128" height="auto" alt="Image of {{ keyObj.username }}">
+                        {% endif %}
+                    </div>
                 </div>
                 {% elif field.label == "Birth date" %}
-                <div class="row m-2"> 
+                <div class="row g-0 m-2"> 
                     <div class="col-sm-4">
                         <label>{{field.label}}</label>
                         <p>{{field}}</p>
                     </div>
                 </div>
                 {% else %}
-                <div class="row m-2"> 
+                <div class="row g-0 m-2"> 
                     <div class="col-md-auto">
                         <label>{{field.label}}</label>
                         <p>{{field}}</p>
@@ -73,8 +79,8 @@
             {% endfor %}
         </div>
 
-        <div class="container-md">
-            <div class="row mb-3 m-2"> 
+        <div class="container-md bg-transparent">
+            <div class="row g-0 m-2"> 
                 <div class="col-md-4 ">
                     <a href="{% url 'profile' %}">
                         <input class="btn btn-success" type='submit' value='Save'/>

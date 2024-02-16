@@ -57,7 +57,7 @@ def viewProfile(request):
     currentUserId = str(request.user.id)
     if id is not None:
         userRetrieved = User.objects.get(id=currentUserId)
-        #userExtRetrieved = ModelProfile.objects.get(id=id)
+        #userExtRetrieved = ModelProfile.objects.get(id=currentUserId)
 
     context = {
         "keyObj": userRetrieved,

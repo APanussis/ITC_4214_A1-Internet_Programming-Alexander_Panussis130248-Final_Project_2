@@ -21,7 +21,7 @@
         <div class="row g-0 m-2 justify-content-between">
             <div class="d-flex col-md-2 flex-shrink-2">
                 <div class="btn-group flex-fill">
-                    <a href="{% url 'profileEdit' %}" class="btn">Edit</a>
+                    <a href="{% url 'profileEdit' %}" class="btn justify-content-start text-center">Edit</a>
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
         <div class="METTtable card m-2">
             <div class="row g-0">
                 <div class="col-md-4 mw-34">
-                    {% if keyObj.image != None and keyObj.image != '' %}
+                    {% if keyObj.modelprofile.image != None and keyObj.modelprofile.image != '' %}
                         <img src="{{ keyObj.modelprofile.image.url }}" class="img-fluid rounded-1" height="auto" alt="Image of {{ keyObj.username }}">
                     {% else %}
                         <img src="{% static 'logoTT_sample2.png' %}" class="img-fluid rounded-1" height="auto" alt="Image of {{ keyObj.username }}">
