@@ -70,9 +70,10 @@ def viewProfileEdit(request): #same funct as viewProductEdit
     currentUserId = str(request.user.id)
     if id is not None:
         userRetrieved = User.objects.get(id=currentUserId)
+        profileRetrieved = ModelProfile.objects.get(id=currentUserId)
 
     formRetrievedUser = FormUser(request.POST or None, request.FILES or None, instance=userRetrieved)
-    formRetrievedProfile = FormProfile(request.POST or None, request.FILES or None, instance=userRetrieved)
+    formRetrievedProfile = FormProfile(request.POST or None, request.FILES or None, instance=profileRetrieved)
 
     if formRetrievedUser.is_valid() and formRetrievedProfile.is_valid():
         formRetrievedUser.save()

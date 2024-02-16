@@ -16,7 +16,11 @@ username_validator = UnicodeUsernameValidator()
 class FormUser(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email')
+        fields = [
+            'first_name',
+            'last_name', 
+            'email'
+        ]
 
 class FormProfile(forms.ModelForm):
     image               = forms.ImageField(required=False) 
@@ -35,7 +39,11 @@ class FormProfile(forms.ModelForm):
     
     class Meta:
         model = ModelProfile
-        fields = ['image', 'bio', 'birth_date']
+        fields = [
+            'image',
+            'bio',
+            'birth_date'
+        ]
 
 # # # # #
         
