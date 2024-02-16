@@ -1,9 +1,17 @@
 /* 
-color pallete:
+color pallete reference:
 #004580 blue
+#3174ad in-between blue and skyblue
 #7fc4e1 skyblue
-#E33636 red
+#E33636 burgundy red
 #E58F2B sandy ochra yellow
+
+Gold:
+#e2c479 bright <-wave
+#debd68 light
+#dbb658 medium <- main
+#c5a34f dim
+#af9146 dark <-shadow
 
 #4b2a54 dark mode purple
 #ffe600 canary yellow
@@ -11,25 +19,6 @@ color pallete:
 #651D77 purple
 */
 
-/* Carousel css and card css*/
-
-.carousel-inner {
-    max-width: 300px; /* Adjust the width as needed */
-    margin: auto; /* This centers the carousel if the container is bigger */
-}
-
-.carousel-caption {
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for text */
-    color: #E58F2B;
-}
-
-.card {
-    box-shadow: 0 0 15px #651D77; /* Adds a subtle shadow to cards */
-}
-
-.card-title {
-    color: #E58F2B;
-}
 
 /* Overall Project */
 
@@ -37,8 +26,12 @@ body{
     font-family: Helvetica, Arial, sans-serif;
     background-color: #7fc4e1;
     z-index: -1;
-    display: flex;  /*we set this property to"flex" and the one below to "column", to allow the body's contents to be contained and flexibly manipulated according to the shape
-                    and size of the browser window. Good sources: "https://css-tricks.com/snippets/css/a-guide-to-flexbox/" , "https://dev.to/nehalahmadkhan/how-to-make-footer-stick-to-bottom-of-web-page-3i14" */
+    display: flex;  /*we set this property to"flex" and the one below to "column", 
+                    to allow the body's contents to be contained and flexibly manipulated according to the shape
+                    and size of the browser window.
+                    "https://css-tricks.com/snippets/css/a-guide-to-flexbox/"
+                    "https://dev.to/nehalahmadkhan/how-to-make-footer-stick-to-bottom-of-web-page-3i14" */
+
     flex-direction: column; /*Lets us decide the direction, or rather axis on which items get rearranged/moved towards. */
 }
 
@@ -59,12 +52,48 @@ h1 {
     padding: 3;
 }
 
-.eyeRestPadding {
-    border-radius: 20px;
-    margin: 20px 20px 20px 20px;
-    padding-top: 20px;
-    padding-bottom: auto;
+h4 {
+    font-weight: bold;
+    text-align: center;
+    background-color: #004580;
+    color:#E33636;
+    margin: 3;
+    padding: 3;
 }
+
+a {
+    color: #004580;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+
+
+/* Carousel css and card css*/
+
+.carousel-inner {
+    max-width: 300px; /* Adjust the width as needed */
+    margin: auto; /* This centers the carousel if the container is bigger */
+}
+
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background for text */
+    color: #E58F2B;
+}
+
+.card {
+    box-shadow: 0 0 15px #651D77; /* Adds a subtle shadow to cards */
+}
+
+.card-header {
+    background-color: #E58F2B;
+}
+
+
+/* Extra customizations */
 
 .table {
     border-color: #004580;
@@ -81,13 +110,17 @@ h1 {
     color:#004580;
 }
 
-.nav-item {
+.nav-link {
+    color: #004580;
+}
+
+.navbar-nav .nav-item {
     border-radius: 5px;
     background-color: #E33636;
     margin: auto 20px auto 20px;
 }
 
-.nav-link {
+.navbar-nav .btn .nav-link {
     border-width: 16px;
     margin-left: 16px;
     margin-right: 16px;
@@ -95,3 +128,49 @@ h1 {
     color: #004580;
 }
 
+.btn {
+    background-color: #E33636;
+    color: #004580;
+}
+
+.btnBuy {
+    background-color: #dbb658;
+    color: #004580;
+}
+
+.btn:hover {
+    color: #ffffff !important;
+}
+
+.btn .nav-link:hover {
+    color: #ffffff !important;
+}
+
+.TT-container-results {
+    background-color: #E33636;
+    color: #025f3b;
+}
+
+.METTtable {
+    background-color: #3174ad;
+}
+
+.linkCard:hover {
+    color: #E58F2B !important;
+    text-decoration: none;
+}
+
+.METTtable-col {
+    background-color: #E33636;
+    color: #004580; 
+}
+
+.placeholder-wave {
+    background-color: #af9146 !important;
+    color: #e2c479 !important;
+}
+
+.TTprofImage:hover {
+    background-color: #E58F2B !important;
+    box-shadow: 0 0 15px #651D77 !important; 
+}

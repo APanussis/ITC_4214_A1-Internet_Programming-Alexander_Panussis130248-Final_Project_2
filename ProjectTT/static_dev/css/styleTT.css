@@ -169,3 +169,8 @@ ul {
     background-color: #af9146 !important;
     color: #e2c479 !important;
 }
+
+.TTprofImage:hover {
+    background-color: #E58F2B !important;
+    box-shadow: 0 0 15px #651D77 !important; 
+}
