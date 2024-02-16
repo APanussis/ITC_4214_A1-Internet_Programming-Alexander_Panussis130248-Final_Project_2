@@ -4,13 +4,8 @@
 {% block content_profile %}
 
     <h1>{{ keyObj.username }}'s Profile Page</h1>
-    {{ keyObj.profile.image.url }}
-    {{ sessionInfo }}
+    <p>{{ keyObj.profile.image.url }}</p>
 
-
-    <h1>
-        Currently looking at: {{ keyObj.username }}
-    </h1>
     <hr>
 
     <div class="container-md bg-transparent">
@@ -26,7 +21,7 @@
         <div class="row g-0 m-2 justify-content-between">
             <div class="d-flex col-md-2 flex-shrink-2">
                 <div class="btn-group flex-fill">
-                    <a href="{% url 'profileEdit' id=keyObj.id %}" class="btn">Edit</a>
+                    <a href="{% url 'profileEdit' %}" class="btn">Edit</a>
                 </div>
             </div>
         </div>

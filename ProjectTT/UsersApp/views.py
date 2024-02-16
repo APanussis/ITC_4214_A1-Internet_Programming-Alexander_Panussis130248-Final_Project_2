@@ -51,64 +51,40 @@ def viewCustomLogout(request):
         return render(request, 'ItemsApp/home.html') #cant use 'return redirect' within the view method, use 'request' instead
     return render(request, 'UsersApp/logout.html', {})
 
-@login_required
-@transaction.atomic
-def viewProfileEdit(request):
-    if request.method == 'POST':
-        user_form = FormUser(request.POST, instance=request.user)
-        profile_form = FormProfile(request.POST, instance=request.user.modelprofile)
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
-            messages.success(request, f'Your account has been updated!')
-            return HttpResponseRedirect(reverse("profile")) # Redirect back to profile page
-        else:
-            messages.error(request, f'Please correct the error below.')
-    else:
-        user_form = FormUser(instance=request.user)
-        profile_form = FormProfile(instance=request.user.modelprofile)
-    return render(request, 'UsersApp/profileEdit.html', {
-        'keyUUForm': user_form,
-        'keyProfUForm': profile_form
-    })
-# ####################################################################################################################################
-# @login_required # JUST MAKE A SIMPLE auth.User Model extension and send E-MAIL TO PROFESSOR FOR HELP
-# def viewProfile(request):
-    
-# ####################################################################################################################################
-#     if request.method == 'POST':
-#         uUpdateForm = FormUserUpdate(request.POST, instance=request.user)
-#         profUpdateForm = FormProfileUpdate(request.POST, request.FILES, instance=request.user.ModelProfile)
-#         if uUpdateForm.is_valid() and profUpdateForm.is_valid():
-#             uUpdateForm.save()
-#             profUpdateForm.save()
-#             messages.success(request, f'Your account has been updated!')
-#             return HttpResponseRedirect(reverse("profile")) # Redirect back to profile page
-
-#     else:
-#         uUpdateForm = FormUserUpdate(instance=request.user)
-#         profUpdateForm = FormProfileUpdate(instance=request.user.profile)
-
-#     context = {
-#         'keyUUForm': uUpdateForm,
-#         'keyProfUForm': profUpdateForm
-#     }
-
-#     return render(request, 'users/profile.html', context)
-# ####
 
 @login_required
-def viewProfile(request, id):
-    userRetrieved = None
+def viewProfile(request):
+    currentUserId = str(request.user.id)
     if id is not None:
-        userRetrieved = User.objects.get(pk=id)
-        userExtRetrieved = ModelProfile.objects.get(user_id=id)
+        userRetrieved = User.objects.get(id=currentUserId)
+        #userExtRetrieved = ModelProfile.objects.get(id=id)
 
     context = {
         "keyObj": userRetrieved,
-        "keyObjExt": userExtRetrieved,
+        #"keyObjExt": userExtRetrieved,
     }
-    return render(request, "UsersApp/profile.html", context)    
+    return render(request, "UsersApp/profile.html", context)
+
+@login_required
+def viewProfileEdit(request): #same funct as viewProductEdit
+    currentUserId = str(request.user.id)
+    if id is not None:
+        userRetrieved = User.objects.get(id=currentUserId)
+
+    formRetrievedUser = FormUser(request.POST or None, request.FILES or None, instance=userRetrieved)
+    formRetrievedProfile = FormProfile(request.POST or None, request.FILES or None, instance=userRetrieved)
+
+    if formRetrievedUser.is_valid() and formRetrievedProfile.is_valid():
+        formRetrievedUser.save()
+        formRetrievedProfile.save()
+        return render(request, "UsersApp/profile.html", {"keyObj": userRetrieved})
+    
+    context = {
+        "keyObj": userRetrieved,
+        "keyFormUser": formRetrievedUser,
+        "keyFormProfile": formRetrievedProfile,
+    }
+    return render(request, "UsersApp/profileEdit.html", context)
 
 @login_required
 def viewProfileList(request, *args, **kwargs):

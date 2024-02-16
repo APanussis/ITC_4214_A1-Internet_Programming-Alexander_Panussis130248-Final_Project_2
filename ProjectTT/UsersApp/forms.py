@@ -19,9 +19,23 @@ class FormUser(forms.ModelForm):
         fields = ('first_name', 'last_name', 'email')
 
 class FormProfile(forms.ModelForm):
+    image               = forms.ImageField(required=False) 
+    bio                 = forms.CharField(widget=forms.Textarea, required=False)
+    birth_date          = forms.DateField(                          #DateInput widget for convenience
+                                    initial=datetime.date.today,
+                                    widget= forms.DateInput 
+                                        (attrs=
+                                            {                       
+                                                'type':'date',
+                                                'class': 'form-control',
+                                                'cols': 30,
+                                            }
+                                        )
+                                    )
+    
     class Meta:
         model = ModelProfile
-        fields = ('image', 'bio', 'birth_date')
+        fields = ['image', 'bio', 'birth_date']
 
 # # # # #
         
