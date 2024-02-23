@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content_productInfo %}
+    <h1>
+        Create new entries for the Category table:
+    </h1>
+    <form action='.' method='POST' enctype="multipart/form-data"> {% csrf_token %}
+        <div class="container-md">
+            {% for field in keyFormCategory %} 
+            <div class="row m-2"> 
+                <div class="col-md-auto">
+                    <label>{{field.label}}</label>
+                    <p>{{field}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="container-md">
+            <div class="row mb-3 m-2"> <!-- Attempts to execute a POST method to create new product entry in DB-->
+                <div class="col-md-4 ">
+                    <input class="btn btn-success" type='submit' value='Save'/>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <h1>
+        Create new entries for the Manufacturer table:
+    </h1>
+    <form action='.' method='POST' enctype="multipart/form-data"> {% csrf_token %}
+        <div class="container-md">
+            {% for field in keyFormManufacturer %} 
+            <div class="row m-2"> 
+                <div class="col-md-auto">
+                    <label>{{field.label}}</label>
+                    <p>{{field}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="container-md">
+            <div class="row mb-3 m-2"> <!-- Attempts to execute a POST method to create new product entry in DB-->
+                <div class="col-md-4 ">
+                    <input class="btn btn-success" type='submit' value='Save'/>
+                </div>
+            </div>
+        </div>
+    </form>
+
+{% endblock content_productInfo %}
+
+

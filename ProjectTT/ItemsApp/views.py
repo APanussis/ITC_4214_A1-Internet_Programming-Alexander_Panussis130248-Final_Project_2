@@ -8,8 +8,8 @@ from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 
-from .forms import FormProduct, FormSearch
-from .models import ModelProduct
+from .forms import FormProduct, FormCategory, FormManufacturer, FormSearch
+from .models import ModelProduct, ModelCategory, ModelManufacturer
 
 # Create your views here.
 
@@ -18,7 +18,7 @@ from .models import ModelProduct
 # ║ ║ ║ ║ ║ ║ ║ ║ ║ ║ ║ ║ ║ ║ ║ ║ ╚════════════════════════════════════════════════╝ ║ ║ ║ ║ ║ ║ ║ ║ ║ ║ ║ ║ ║ ║ ║ ║
 
 @login_required
-def viewTest(request, *args, **kwargs): ##### WIP - Currently working on
+def viewTest(request, *args, **kwargs): 
     currentUser = str(request.user)
     flagAuthenticated = str(request.user.is_authenticated)
     s2 = str(args)
@@ -72,19 +72,40 @@ def viewProductSearch(request):
     return render(request, "ItemsApp/home.html", context)
 
 @login_required
-def viewProductCreate(request): #FIX IMAGES NOT GETTING SAVED IN SEPERATE DIRS
+def viewOptionsCreate(request): 
+    
+    formCategoryRetrieved = FormCategory(request.POST or None)
+    formManufacturerRetrieved = FormManufacturer(request.POST or None)
+
+    if formCategoryRetrieved.is_valid():
+        formCategoryRetrieved.save()
+        formCategoryRetrieved = FormCategory()
+        
+    if formManufacturerRetrieved.is_valid():
+        formManufacturerRetrieved.save()
+        formManufacturerRetrieved = FormManufacturer()
+
+    context = {
+        "keyFormCategory": formCategoryRetrieved,
+        "keyFormManufacturer": formManufacturerRetrieved,
+    }
+    return render(request, "ItemsApp/optionsCreate.html", context)
+
+@login_required
+def viewProductCreate(request): 
     
     initial_data = {
         'release_date': datetime.date.today(),
     }
         
     # Simplified version of CODE SNIPPET(1*), using the forms.ModelForm instead of a raw forms.Form
-    formRetrieved = FormProduct(request.POST or None, request.FILES or None, initial=initial_data) #Current date as "initial_data" for the "release_date" field
-    if formRetrieved.is_valid():
-        formRetrieved.save()
-        formRetrieved = FormProduct()
+    formProductRetrieved = FormProduct(request.POST or None, request.FILES or None, initial=initial_data) #Current date as "initial_data" for the "release_date" field
+    if formProductRetrieved.is_valid():
+        formProductRetrieved.save()
+        formProductRetrieved = FormProduct()
+
     context = {
-        "keyForm": formRetrieved,
+        "keyForm": formProductRetrieved,
     }
     return render(request, "ItemsApp/productCreate.html", context)
 
