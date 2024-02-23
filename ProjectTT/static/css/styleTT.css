@@ -170,7 +170,12 @@ ul {
     color: #e2c479 !important;
 }
 
-.TTprofImage:hover {
+.TTimage:hover {
     background-color: #E58F2B !important;
     box-shadow: 0 0 15px #651D77 !important; 
 }
+
+.TTimage {
+    color: #004580;
+}
+

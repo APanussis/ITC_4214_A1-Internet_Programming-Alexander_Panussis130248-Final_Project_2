@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import ModelProduct
+from .models import ModelProduct, ModelCategory, ModelManufacturer
 
 #QoL change: 
 #   list_display:
@@ -16,3 +16,5 @@ class ModelProductAdmin(admin.ModelAdmin):
 # Register your models here.
 
 admin.site.register(ModelProduct, ModelProductAdmin)
+admin.site.register(ModelCategory)
+admin.site.register(ModelManufacturer)

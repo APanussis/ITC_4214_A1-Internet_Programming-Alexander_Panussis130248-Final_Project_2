@@ -45,9 +45,13 @@
                             </div>
                         </li>
                         <a href="{% url 'profile' %}">
-                            <li class="nav-item flex-fill TTimage">
+                            <li class="nav-item TTimage">
                                 <div class="p-1">
-                                    <img src="{{ user.modelprofile.image.url }}" class="img-fluid rounded-1" width="30" height="auto" alt="Image of {{ user.username }}">
+                                    {% if user.modelprofile.image != None and user.modelprofile.image != '' %}
+                                        <img src="{{ user.modelprofile.image.url }}" class="img-fluid rounded-1" width="30" height="auto" alt="Image of {{ user.username }}">
+                                    {% else %}
+                                        <img src="{% static 'logoTT_sample2.png' %}" class="img-fluid rounded-1" width="30" height="auto" alt="Image of {{ user.username }}">
+                                    {% endif %}
                                 </div>
                             </li>
                         </a>

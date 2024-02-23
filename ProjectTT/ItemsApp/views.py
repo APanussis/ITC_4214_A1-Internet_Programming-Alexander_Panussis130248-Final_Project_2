@@ -80,7 +80,7 @@ def viewOptionsCreate(request):
     if formCategoryRetrieved.is_valid():
         formCategoryRetrieved.save()
         formCategoryRetrieved = FormCategory()
-        
+
     if formManufacturerRetrieved.is_valid():
         formManufacturerRetrieved.save()
         formManufacturerRetrieved = FormManufacturer()
@@ -120,7 +120,7 @@ def viewProductInfo(request, id): #View with 'Dynamic Lookup' functionality wher
 
     return render(request, "ItemsApp/productInfo.html", context)
 
-@login_required
+@login_required 
 def viewProductEdit(request, id):
     objRetrieved = None
 
@@ -128,7 +128,6 @@ def viewProductEdit(request, id):
         objRetrieved = ModelProduct.objects.get(id=id)
         
 
-    print(objRetrieved.id, objRetrieved.name)
     formRetrieved = FormProduct(request.POST or None, request.FILES or None, instance=objRetrieved) #Current date as "initial_data" for the "release_date" field
     if formRetrieved.is_valid():
         formRetrieved.save()
@@ -141,7 +140,7 @@ def viewProductEdit(request, id):
     }
     return render(request, "ItemsApp/productEdit.html", context)
 
-### WIP
+
 @login_required
 def viewProductDelete(request, id):
     objRetrieved = None
