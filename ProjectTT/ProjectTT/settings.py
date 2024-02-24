@@ -46,10 +46,10 @@ INSTALLED_APPS = [
     #My Apps
     'ItemsApp',
     'UsersApp',
-    'CartApp',
-    'CarouselApp', # might be a good idea to integrate this into 'ItemsApp'
+    'CartApp', #Placeholder app/module.Not implemented currently.
+    'CarouselApp', #Placeholder app/module. Not implemented currently.
     
-    'ZZPageManagerApp',
+    'ZZPageManagerApp', #Old app/module used during early development stages of the project. Currently only used for the "cart.html" template.
 ]
 
 MIDDLEWARE = [

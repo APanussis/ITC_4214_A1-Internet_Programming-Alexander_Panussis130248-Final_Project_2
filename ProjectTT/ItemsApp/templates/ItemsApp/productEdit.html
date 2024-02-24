@@ -6,6 +6,7 @@
         Editing this Product entry: {{ keyObj.name }}
     </h1>
 
+    <!-- NOTE: validationFlag currently not implemented -->
     {% if validationFlag != None %}
         <div id="validationFlag" class="card container-md" style='background-color: black; color: red;'>
             <div class="row m-2">
@@ -16,6 +17,7 @@
             </div>
         </div>
     {% endif %}
+    
 
     <form action='.' method='POST' enctype="multipart/form-data"> {% csrf_token %}
 

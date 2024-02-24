@@ -9,8 +9,6 @@ class FormSearch(forms.Form):
     q = forms.CharField(label='Search', max_length=50, widget=forms.TextInput(attrs={'placeholder': 'Search'}))
 
 class FormProduct(forms.ModelForm):
-
-
     name                    = forms.CharField(max_length = 60, widget=forms.TextInput) 
     image                   = forms.ImageField(required=False) 
     description             = forms.CharField(widget=forms.Textarea)    #TextArea widget to give the user space to write something more than a single sentence.
